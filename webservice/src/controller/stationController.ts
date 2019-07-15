@@ -1,7 +1,7 @@
 import { Controller, Get, Request as Req, Response as Res } from "@decorators/express";
 import { Container } from "@decorators/di";
 import { Request, Response } from "express";
-import { StationSerivce, OtdsStationService } from "../service/stationService";
+import { StationSerivce, OtdsStationService, OpenDataStationService } from "../service/stationService";
 import { ApiResponseBuilder } from "../dto";
 
 @Controller("/api/v1")
@@ -10,7 +10,7 @@ class StationController {
     private stationService: StationSerivce;
 
     public constructor() {
-        this.stationService = Container.get<StationSerivce>(OtdsStationService);
+        this.stationService = Container.get<StationSerivce>(OpenDataStationService);
     }
 
     @Get("/station/search")

@@ -4,7 +4,8 @@ import {
     Station, 
     StationSearchResult, 
     OtdsStationRecord, 
-    OtdsStation 
+    OtdsStation, 
+    OpenDataStation
 } from "../model/station";
 import { Injectable } from "@decorators/di";
 
@@ -44,4 +45,24 @@ export class OtdsStationService implements StationSerivce {
             throw new Error("oh no!");
         }
     }
+}
+
+@Injectable()
+export class OpenDataStationService implements StationSerivce {
+    private url: string = "http://transport.opendata.ch/v1/locations";
+    
+    private getURL(query: string): string {
+        const params = new URLSearchParams({
+            query,
+        });
+        
+        return this.url + "?" + params.toString(); 
+    }
+
+    public async searchStation(searchTerm: string): Promise<SearchStation[]> {
+        const response = await fetch(this.getURL(searchTerm));
+        const data = await response.json();
+        return data.stations.map(x => new OpenDataStation(x));
+    }
+
 }

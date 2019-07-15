@@ -26,3 +26,10 @@ export class ApiResponseBuilder implements ApiResponse {
         return this;
     }
 }
+
+export interface StationDTO {
+    id: string;
+    name: string;
+    position?: { x: number; y: number };
+    type?: string;
+}
