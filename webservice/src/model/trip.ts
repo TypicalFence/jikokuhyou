@@ -1,5 +1,5 @@
 import { Station, OpenDataStation } from "./station";
-import { OpenDataTripRecord, OpenDataStopRecord } from "../dto/external/opendata";
+import { OpenDataTripRecord, OpenDataStopRecord } from "../protocol/external/opendata";
 
 export interface Stop {
     getStation(): Station;

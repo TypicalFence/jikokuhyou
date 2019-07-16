@@ -1,7 +1,7 @@
 import { Injectable } from "@decorators/di";
 import fetch from "node-fetch";
 import { TripService } from ".";
-import { OpenDataTripRecord } from "../../dto";
+import { OpenDataTripRecord } from "../../protocol";
 import { OpenDataTrip, Trip } from "../../model/trip";
 
 

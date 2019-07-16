@@ -1,5 +1,5 @@
 import { HasPosition, Position } from "./postion";
-import { StationDTO, OpenDataStationRecord, OtdsStationRecord } from "../dto";
+import { StationDTO, OpenDataStationRecord, OtdsStationRecord } from "../protocol";
 
 export interface Station {
     getName(): string;

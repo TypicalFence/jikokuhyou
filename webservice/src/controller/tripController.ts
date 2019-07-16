@@ -2,7 +2,7 @@ import { Controller, Get, Request as Req, Response as Res } from "@decorators/ex
 import { Container } from "@decorators/di";
 import { Request, Response } from "express";
 import { TripService, OpenDataTripService } from "../service/tripService";
-import { ApiResponseBuilder } from "../dto";
+import { ApiResponseBuilder } from "../protocol";
 
 @Controller("/api/v1/trip")
 export default class TripController {

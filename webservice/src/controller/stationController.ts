@@ -2,7 +2,7 @@ import { Controller, Get, Request as Req, Response as Res } from "@decorators/ex
 import { Container } from "@decorators/di";
 import { Request, Response } from "express";
 import { StationSerivce, OpenDataStationService } from "../service/stationService";
-import { ApiResponseBuilder } from "../dto";
+import { ApiResponseBuilder } from "../protocol";
 
 @Controller("/api/v1")
 class StationController {
