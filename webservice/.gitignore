@@ -87,3 +87,5 @@ package-lock.json
 *.sqlite
 key
 key.pub
+
+config.private.js

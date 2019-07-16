@@ -27,9 +27,14 @@ export class ApiResponseBuilder implements ApiResponse {
     }
 }
 
-export interface StationDTO {
-    id: string;
-    name: string;
-    position?: { x: number; y: number };
-    type?: string;
-}
+export { StationDTO } from "./api";
+
+// external
+export { 
+    OpenDataStationRecord,
+    OpenDataStopRecord,
+    OpenDataTripRecord,
+    OpenDataJourneyRecord,
+    OpenDataSectionRecord,
+} from "./external/opendata";
+export { OtdsStationRecord } from "./external/otds";

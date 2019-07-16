@@ -3,10 +3,10 @@ import fetch from "node-fetch";
 import { 
     Station, 
     StationSearchResult, 
-    OtdsStationRecord, 
     OtdsStation, 
     OpenDataStation
 } from "../model/station";
+import { OpenDataStationRecord } from "../dto";
 import { Injectable } from "@decorators/di";
 
 type SearchStation = (Station & StationSearchResult);
@@ -62,7 +62,8 @@ export class OpenDataStationService implements StationSerivce {
     public async searchStation(searchTerm: string): Promise<SearchStation[]> {
         const response = await fetch(this.getURL(searchTerm));
         const data = await response.json();
-        return data.stations.map(x => new OpenDataStation(x));
+        return data.stations.map((x: OpenDataStationRecord) => new OpenDataStation(x));
+
     }
 
 }

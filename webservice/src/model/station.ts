@@ -1,5 +1,5 @@
 import { HasPosition, Position } from "./postion";
-import { StationDTO } from "../dto";
+import { StationDTO, OpenDataStationRecord, OtdsStationRecord } from "../dto";
 
 export interface Station {
     getName(): string;
@@ -15,14 +15,6 @@ export interface Typed {
 }
 
 //opentransportdata.swiss
-export interface OtdsStationRecord {
-    Station: string;
-    StationID: string;
-    _id: number;
-    _full_count: string;
-    rank: number;
-}
-
 export class OtdsStation implements Station, StationSearchResult {
    
     private data: OtdsStationRecord;
@@ -52,19 +44,6 @@ export class OtdsStation implements Station, StationSearchResult {
 }
 
 // transport.opendata.ch/
-export interface OpenDataStationRecord {
-    id: string;
-    name: string;
-    score: number;
-    coordinate: {
-        type: string;
-        x: number;
-        y: number;
-    };
-    distance: number;
-    type: string;
-}
-
 export class OpenDataStation implements Station, StationSearchResult, HasPosition, Typed {
    
     private name: string;

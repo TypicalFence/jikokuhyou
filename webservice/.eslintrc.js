@@ -36,7 +36,8 @@ module.exports = {
             "error",
             "always"
         ],
-        "max-len":  ["error", { "code": 99 }], 
+        "max-len":  ["error", { "code": 120 }],
+        '@typescript-eslint/explicit-function-return-type': [1, { allowExpressions: true }] 
     },
     "settings": {
         "import/resolver": {
