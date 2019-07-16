@@ -6,7 +6,7 @@ import {
     OtdsStation, 
     OpenDataStation
 } from "../model/station";
-import { OpenDataStationRecord } from "../dto";
+import { OpenDataStationRecord, OtdsStationRecord } from "../dto";
 import { Injectable } from "@decorators/di";
 
 type SearchStation = (Station & StationSearchResult);

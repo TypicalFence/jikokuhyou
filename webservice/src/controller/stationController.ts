@@ -1,7 +1,7 @@
 import { Controller, Get, Request as Req, Response as Res } from "@decorators/express";
 import { Container } from "@decorators/di";
 import { Request, Response } from "express";
-import { StationSerivce, OtdsStationService, OpenDataStationService } from "../service/stationService";
+import { StationSerivce, OpenDataStationService } from "../service/stationService";
 import { ApiResponseBuilder } from "../dto";
 
 @Controller("/api/v1")
