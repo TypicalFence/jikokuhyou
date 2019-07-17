@@ -4,6 +4,7 @@ import { StationDTO, OpenDataStationRecord, OtdsStationRecord } from "../protoco
 export interface Station {
     getName(): string;
     getStationID(): string;
+    toJSON(): StationDTO;
 }
 
 export interface StationSearchResult {

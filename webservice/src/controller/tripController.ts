@@ -19,7 +19,7 @@ export default class TripController {
         
         const { from, to } = request.query;
         if (from && to) { 
-            const trips = await this.tripService.findTrips("8500320", "8500322");
+            const trips = await this.tripService.findTrips(from, to);
             return response.send(new ApiResponseBuilder(200).withData(trips));
         } else {
             return response.send(new ApiResponseBuilder(400).withMSG("no from & to"));

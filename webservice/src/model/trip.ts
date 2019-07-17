@@ -1,5 +1,6 @@
 import { Station, OpenDataStation } from "./station";
 import { OpenDataTripRecord, OpenDataStopRecord } from "../protocol/external/opendata";
+import { StopDTO, TripDTO, JourneyDTO } from "../protocol/api";
 
 export interface Stop {
     getStation(): Station;
@@ -8,6 +9,7 @@ export interface Stop {
     getArival(): number|null;
     getDelay(): number|null;
     getPlatform(): string|null;
+    toJSON(): StopDTO;
 }
 
 export interface Trip {
@@ -15,10 +17,12 @@ export interface Trip {
     getTo(): Stop;
     getDuration(): string;
     getProducts(): string[];
+    toJSON(): TripDTO;
 }
 
 export interface Journey {
     getStops(): Stop[];
+    toJSON(): JourneyDTO;
 }
 
 export class OpenDataStop implements Stop {
@@ -34,6 +38,16 @@ export class OpenDataStop implements Stop {
         this.station = new OpenDataStation(data.station);
         this.platform = data.platform;
         this.delay = data.delay; 
+    }
+
+    public toJSON(): StopDTO {
+        return {
+            arrival: this.arrival,
+            departure: this.departure,
+            delay: this.delay,
+            station: this.station.toJSON(),
+            platform: this.platform,
+        };
     }
 
     public getStation(): Station {
@@ -72,10 +86,21 @@ export class OpenDataTrip implements Trip, Journey {
         this.products = data.products;
         this.stops = [];
         
+        // TODO there are more sections when you have to change to another train
         if(data.sections[0].journey && data.sections[0].journey.passList.length > 0) {
             const passList = data.sections[0].journey.passList;
             this.stops = passList.map((x: OpenDataStopRecord) => new OpenDataStop(x));
         }
+    }
+
+    public toJSON(): (TripDTO & JourneyDTO) {
+        return {
+            from: this.from.toJSON(),
+            to: this.to.toJSON(),
+            duration: this.duration,
+            products: this.products,
+            stops: this.stops.map((x: Stop) => x.toJSON()),
+        };
     }
 
     public getFrom(): Stop {
