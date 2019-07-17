@@ -47,11 +47,11 @@ export class OtdsStation implements Station, StationSearchResult {
 // transport.opendata.ch/
 export class OpenDataStation implements Station, StationSearchResult, HasPosition, Typed {
    
-    private name: string;
-    private id: string;
-    private position: Position;
-    private type: string;
-    private score: number;
+    private readonly name: string;
+    private readonly id: string;
+    private readonly position: Position;
+    private readonly type: string;
+    private readonly score: number;
 
     public constructor(data: OpenDataStationRecord) {
         this.name = data.name;

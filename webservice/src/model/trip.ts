@@ -1,5 +1,5 @@
 import { Station, OpenDataStation } from "./station";
-import { OpenDataTripRecord, OpenDataStopRecord } from "../protocol/external/opendata";
+import { OpenDataTripRecord, OpenDataStopRecord } from "../protocol";
 import { StopDTO, TripDTO, JourneyDTO } from "../protocol/api";
 
 export interface Stop {
@@ -26,11 +26,11 @@ export interface Journey {
 }
 
 export class OpenDataStop implements Stop {
-    private arrival: number|null;
-    private departure: number|null;
-    private station: Station;
-    private delay: number|null;
-    private platform: string|null;
+    private readonly arrival: number|null;
+    private readonly departure: number|null;
+    private readonly station: Station;
+    private readonly delay: number|null;
+    private readonly platform: string|null;
 
     public constructor(data: OpenDataStopRecord) {
         this.arrival = data.arrivalTimestamp;
@@ -73,11 +73,11 @@ export class OpenDataStop implements Stop {
 
 export class OpenDataTrip implements Trip, Journey {
     
-    private from: Stop;
-    private to: Stop;
-    private duration: string;
-    private products: string[];
-    private stops: Stop[];
+    private readonly from: Stop;
+    private readonly to: Stop;
+    private readonly duration: string;
+    private readonly products: string[];
+    private readonly stops: Stop[];
 
     public constructor(data: OpenDataTripRecord) {
         this.from = new OpenDataStop(data.from);
