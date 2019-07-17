@@ -1,7 +1,12 @@
-import private from "./config.private.js";
+import privateConfig from "./config.private.js";
+import diConfig from "./config.di";
 
 const config = {
-    ...private
+    port: 3000,
 };
 
-export default config;
+export default {
+    ...config,
+    ...privateConfig,
+    ...diConfig,
+};

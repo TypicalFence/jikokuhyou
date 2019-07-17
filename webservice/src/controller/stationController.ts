@@ -1,8 +1,9 @@
 import { Controller, Get, Request as Req, Response as Res } from "@decorators/express";
 import { Container } from "@decorators/di";
 import { Request, Response } from "express";
-import { StationSerivce, OpenDataStationService } from "../service/stationService";
+import { StationSerivce } from "../service/stationService";
 import { ApiResponseBuilder } from "../protocol";
+import { config, Config } from "../config";
 
 @Controller("/api/v1")
 class StationController {
@@ -10,7 +11,8 @@ class StationController {
     private stationService: StationSerivce;
 
     public constructor() {
-        this.stationService = Container.get<StationSerivce>(OpenDataStationService);
+        const conf = Container.get<Config>(config);
+        this.stationService = Container.get<StationSerivce>(conf.stationService);
     }
 
     @Get("/station/search")

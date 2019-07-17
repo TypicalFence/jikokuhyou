@@ -1,8 +1,9 @@
 import { Controller, Get, Request as Req, Response as Res } from "@decorators/express";
 import { Container } from "@decorators/di";
 import { Request, Response } from "express";
-import { TripService, OpenDataTripService } from "../service/tripService";
+import { TripService } from "../service/tripService";
 import { ApiResponseBuilder } from "../protocol";
+import { config, Config } from "../config";
 
 @Controller("/api/v1/trip")
 export default class TripController {
@@ -10,7 +11,8 @@ export default class TripController {
     private tripService: TripService;
 
     public constructor() {
-        this.tripService = Container.get<TripService>(OpenDataTripService);
+        const conf = Container.get<Config>(config);
+        this.tripService = Container.get<TripService>(conf.tripService);
     }
 
     @Get("/")

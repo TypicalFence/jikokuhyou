@@ -63,7 +63,7 @@ export default class OtdsTripService implements TripService {
 
     public constructor(@Inject(config) conf: Config) {
         this.config = conf;
-        this.apiKey = this.config.otdsApiKey;
+        this.apiKey = this.config.otdsApiKey || "";
     }
 
     public async findTrips(from: string, to: string): Promise<Trip[]> {
