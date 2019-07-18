@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router, Route, Link, Switch,
 } from "react-router-dom";
 import Test from "./test";
+import TripSearch from "./tripSearch";
 
 const root = () => (
     <div>
@@ -34,6 +35,7 @@ export default class App extends React.Component {
                         <Route path="/" exact component={root} />
                         <Route path="/hello" component={hello} />
                         <Route path="/typescript" component={Test} />
+                        <Route path="/search" component={TripSearch} />
                     </Switch>
                 </Router>
             </div>
