@@ -22,10 +22,19 @@
     "@typescript-eslint/parser": "^1.12.0",
     "eslint": "^6.0.1",
     "eslint-plugin-import": "^2.18.0",
-    "ts-node-dev": "^1.0.0-pre.40"
+    "ts-node-dev": "^1.0.0-pre.40",
+    "nyc": "^14.1.1",
+    "mocha": "^6.2.0",
+    "nock": "^10.0.6",
+    "@types/mocha": "^5.2.7",
+    "@types/nock": "^10.0.3",
+    "chai": "^4.2.0",
+    "@types/chai": "^4.1.7"
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "mocha --require ts-node/register test/**/*.ts test/**/*.js",
+    "coverage": "nyc -e .ts -e .js --all -x build/ -x test/ -x coverage/ mocha --require ts-node/register test/**/*.ts  test/**/*.js"
   }
 }
