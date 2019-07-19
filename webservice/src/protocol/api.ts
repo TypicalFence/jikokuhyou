@@ -23,6 +23,11 @@ export interface TripDTO {
     products: string[];
 }
 
-export interface JourneyDTO {
+export interface RideDTO {
+    product: string|null;
     stops: StopDTO[];
+}
+
+export interface JourneyDTO {
+    rides: RideDTO[];
 }

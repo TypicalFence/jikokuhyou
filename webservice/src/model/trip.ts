@@ -1,6 +1,14 @@
 import { Station, OpenDataStation } from "./station";
-import { OpenDataTripRecord, OpenDataStopRecord } from "../protocol";
-import { StopDTO, TripDTO, JourneyDTO } from "../protocol/api";
+import { OpenDataTripRecord, OpenDataStopRecord, OpenDataSectionRecord } from "../protocol";
+import { StopDTO, TripDTO, JourneyDTO, RideDTO } from "../protocol/api";
+
+function convertTimestamp(timeStamp: string|null): number|null {
+    if (timeStamp) {
+        return new Date(timeStamp).getTime();
+    }
+
+    return null;
+}
 
 export interface Stop {
     getStation(): Station;
@@ -20,9 +28,44 @@ export interface Trip {
     toJSON(): TripDTO;
 }
 
-export interface Journey {
+export interface Ride {
+    getProduct(): string|null;
     getStops(): Stop[];
+    toJSON(): RideDTO;
+}
+
+export interface Journey {
+    getRides(): Ride[];
     toJSON(): JourneyDTO;
+}
+
+export class OpenDataRide implements Ride {
+   
+    private readonly stops: OpenDataStop[];
+    // TODO properly map product
+    private readonly product: string|null;
+
+    public constructor(product: string|null, stops: OpenDataStop[]) {
+        this.stops = stops;
+        this.product = product;
+    }
+
+    public getProduct(): string|null {
+        return this.product;
+    }    
+    
+    public getStops(): Stop[] {
+        return this.stops;
+    }
+
+    public toJSON(): RideDTO {
+        return {
+            product: this.product, 
+            stops: this.stops.map((x): StopDTO => x.toJSON())
+        };
+    }
+
+
 }
 
 export class OpenDataStop implements Stop {
@@ -33,8 +76,8 @@ export class OpenDataStop implements Stop {
     private readonly platform: string|null;
 
     public constructor(data: OpenDataStopRecord) {
-        this.arrival = data.arrivalTimestamp;
-        this.departure = data.departureTimestamp;
+        this.arrival = convertTimestamp(data.arrival); 
+        this.departure = convertTimestamp(data.departure);
         this.station = new OpenDataStation(data.station);
         this.platform = data.platform;
         this.delay = data.delay; 
@@ -77,20 +120,22 @@ export class OpenDataTrip implements Trip, Journey {
     private readonly to: Stop;
     private readonly duration: string;
     private readonly products: string[];
-    private readonly stops: Stop[];
+    private readonly rides: Ride[];
 
     public constructor(data: OpenDataTripRecord) {
         this.from = new OpenDataStop(data.from);
         this.to = new OpenDataStop(data.to);
         this.duration = data.duration;
         this.products = data.products;
-        this.stops = [];
+        this.rides = [];
         
-        // TODO there are more sections when you have to change to another train
-        if(data.sections[0].journey && data.sections[0].journey.passList.length > 0) {
-            const passList = data.sections[0].journey.passList;
-            this.stops = passList.map((x: OpenDataStopRecord) => new OpenDataStop(x));
-        }
+        data.sections.forEach((s: OpenDataSectionRecord) => {
+            if (s.journey && s.journey.passList.length > 0) {
+                const passList = s.journey.passList;
+                const stops = passList.map((x: OpenDataStopRecord) => new OpenDataStop(x));
+                this.rides.push(new OpenDataRide(s.journey.name, stops));
+            }
+        });
     }
 
     public toJSON(): (TripDTO & JourneyDTO) {
@@ -99,7 +144,7 @@ export class OpenDataTrip implements Trip, Journey {
             to: this.to.toJSON(),
             duration: this.duration,
             products: this.products,
-            stops: this.stops.map((x: Stop) => x.toJSON()),
+            rides: this.rides.map(x => x.toJSON()),
         };
     }
 
@@ -119,8 +164,8 @@ export class OpenDataTrip implements Trip, Journey {
         return this.products;
     }
     
-    public getStops(): Stop[] {
-        return this.stops;
+    public getRides(): Ride[] {
+        return this.rides;
     }
 
 }

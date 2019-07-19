@@ -28,8 +28,10 @@ export interface OpenDataJourneyRecord {
 export interface OpenDataStopRecord {
     station: OpenDataStationRecord;
     arrival: string|null;
+    // cursed timestamp, probably relative to current month
     arrivalTimestamp: number|null;
     departure: string|null;
+    // cursed timestamp, see above
     departureTimestamp: number|null;
     delay: number|null;
     platform: string|null;
