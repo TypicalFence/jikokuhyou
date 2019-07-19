@@ -11,6 +11,6 @@
   "scripts": {
       "postinstall": "yarn bootstrap",
       "bootstrap": "lerna bootstrap --use-workspaces",
-      "postinstall": "lerna run --parallel dev"
+      "dev": "lerna run --parallel dev"
   }
 }
