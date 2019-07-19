@@ -50,6 +50,6 @@
     "react-dom": "^16.8.2",
     "react-dropzone": "^9.0.0",
     "react-router-dom": "^4.3.1",
-    "sbb-webservice": "../webservice"
+    "sbb-webservice": "./webservice"
   }
 }

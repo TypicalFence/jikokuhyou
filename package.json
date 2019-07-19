@@ -1,0 +1,14 @@
+{
+  "name": "sbb-monorepo",
+  "private": true,
+  "workspaces": [
+    "webservice",
+    "webapp"
+  ],
+  "devDependencies": {
+    "lerna": "^3.13.1"
+  },
+  "scripts": {
+      "bootstrap": "lerna bootstrap --use-workspaces"
+  }
+}
