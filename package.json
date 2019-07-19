@@ -9,6 +9,8 @@
     "lerna": "^3.13.1"
   },
   "scripts": {
-      "bootstrap": "lerna bootstrap --use-workspaces"
+      "postinstall": "yarn bootstrap",
+      "bootstrap": "lerna bootstrap --use-workspaces",
+      "postinstall": "lerna run --parallel dev"
   }
 }
