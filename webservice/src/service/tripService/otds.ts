@@ -56,6 +56,7 @@ class TriasTripRequest {
 
 @Injectable()
 export default class OtdsTripService implements TripService {
+    
     private config: Config;
 
     private apiKey: string;
@@ -78,5 +79,11 @@ export default class OtdsTripService implements TripService {
         );
         console.log(response.text());
         throw new Error("oh no!");
+    }
+
+    // this service is currently broken anyway
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public findTripsVia(from: string, to: string, via: string): Promise<Trip[]> {
+        throw new Error("method not implemented.");
     }
 } 

@@ -45,7 +45,9 @@
       ".js"
     ],
     "exclude": [
-      "**/*.d.ts"
+      "**/*.d.ts",
+      "*/coverage",
+      "*/test"
     ],
     "reporter": [
       "html"
