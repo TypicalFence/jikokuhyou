@@ -14,27 +14,41 @@
     "express": "^4.17.1",
     "htmlparser2": "^3.10.1",
     "node-fetch": "^2.6.0",
+    "source-map-support": "^0.5.12",
     "typescript": "^3.5.3",
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.12.0",
-    "@typescript-eslint/parser": "^1.12.0",
-    "eslint": "^6.0.1",
-    "eslint-plugin-import": "^2.18.0",
-    "ts-node-dev": "^1.0.0-pre.40",
-    "nyc": "^14.1.1",
-    "mocha": "^6.2.0",
-    "nock": "^10.0.6",
+    "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
     "@types/nock": "^10.0.3",
+    "@typescript-eslint/eslint-plugin": "^1.12.0",
+    "@typescript-eslint/parser": "^1.12.0",
     "chai": "^4.2.0",
-    "@types/chai": "^4.1.7"
+    "eslint": "^6.0.1",
+    "eslint-plugin-import": "^2.18.0",
+    "mocha": "^6.2.0",
+    "nock": "^10.0.6",
+    "nyc": "^14.1.1",
+    "ts-node-dev": "^1.0.0-pre.40"
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
     "build": "tsc",
-    "test": "mocha --require ts-node/register test/**/*.ts test/**/*.js",
-    "coverage": "nyc -e .ts -e .js --all -x build/ -x test/ -x coverage/ mocha --require ts-node/register test/**/*.ts  test/**/*.js"
+    "test": "mocha",
+    "coverage": "nyc mocha"  
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".js"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true  
   }
 }

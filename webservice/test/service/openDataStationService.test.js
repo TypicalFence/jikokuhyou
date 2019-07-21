@@ -7,7 +7,10 @@ import data from "./opendata.stations.json";
 should();
 
 describe("OpenDataStationService", () => {
-    it("searchStation", async () => {
+    it("should search for Stations", async () => {
+        // TODO inject a mockable api client into the service
+        // and remove the need for nock
+        // nock seems hella slow!
         nock("http://transport.opendata.ch").get("/v1/locations?query=Bern").reply(200, data);
         const service = new OpenDataStationService();
         const stations = await service.searchStation("Bern");
