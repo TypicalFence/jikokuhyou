@@ -1,24 +1,33 @@
 import React from "react";
 import "./index.scss";
-import { TripApiService } from "../../service";
+import { TripApiService, StationApiService } from "../../service";
 import Results from "./results";
+import SearchField from "./stationSearchField";
+
 
 export default class TripSearch extends React.Component {
     constructor(props) {
         super(props);
         this.tripService = new TripApiService();
+        this.stationService = new StationApiService();
 
         this.state = {
             from: "",
             to: "",
             results: [],
+            suggestions: [],
         };
     }
 
-    onTextChange(name) {
-        return (event) => {
+    onSearchFieldChange(name) {
+        return (event, { value, id }) => {
             const state = { ...this.state };
-            state[name] = event.currentTarget.value;
+
+            if (id !== null) {
+                state[name] = id;
+            } else {
+                state[name] = value;
+            }
             this.setState(state);
         };
     }
@@ -33,29 +42,19 @@ export default class TripSearch extends React.Component {
     }
 
     render() {
-        const { from, to, results } = this.state;
+        const {
+            results,
+        } = this.state;
 
         return (
             <div className="box trip-search">
                 <div className="level">
                     <div className="level-left">
-                        <input
-                            className="input"
-                            type="text"
-                            value={from}
-                            placeholder="from"
-                            onChange={this.onTextChange("from").bind(this)}
-                        />
+                        <SearchField api={new StationApiService()} onChange={this.onSearchFieldChange("from").bind(this)} />
                     </div>
 
                     <div className="level-right">
-                        <input
-                            className="input level-item"
-                            type="text"
-                            value={to}
-                            placeholder="to"
-                            onChange={this.onTextChange("to").bind(this)}
-                        />
+                        <SearchField api={new StationApiService()} onChange={this.onSearchFieldChange("to").bind(this)} />
                     </div>
                 </div>
                 <button
