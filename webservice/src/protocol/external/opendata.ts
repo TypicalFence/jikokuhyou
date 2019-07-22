@@ -46,7 +46,7 @@ export interface OpenDataSectionRecord {
     arrival: OpenDataStopRecord;
 }
 
-export interface OpenDataTripRecord {
+export interface OpenDataConnectionRecord {
     from: OpenDataStopRecord;
     to: OpenDataStopRecord;
     duration: string;

@@ -1,51 +1,48 @@
-import { URLSearchParams } from "url";
-import { Injectable } from "@decorators/di";
-import fetch from "node-fetch";
+import { Injectable, Optional, Inject, Container } from "@decorators/di";
 import { TripService, TripServiceOptions } from ".";
-import { OpenDataTripRecord } from "../../protocol";
+import { OpenDataConnectionRecord } from "../../protocol";
 import { OpenDataTrip, Trip } from "../../model/trip";
+import { OpenDataApi, OpenDataApiClient, ConnectionOptions } from "../openDataApiClient";
 
 
 @Injectable()
 export class OpenDataTripService implements TripService {
     
-    private url: string = "http://transport.opendata.ch/v1/connections";
+    private apiClient: OpenDataApi;
 
-    private getURL(params: URLSearchParams): string {
-        return this.url + "?" + params.toString(); 
+    public constructor(@Optional() @Inject("OpenApiClient") api?: OpenDataApi) {
+        if (api) {
+            this.apiClient = api;
+        } else {
+            this.apiClient = Container.get<OpenDataApi>(OpenDataApiClient);
+        }
     }
 
-    private handleTripOptions(urlParams: URLSearchParams, options: TripServiceOptions): URLSearchParams {
-        const params = new URLSearchParams(urlParams.toString());
+    private convertOptions(options: TripServiceOptions): ConnectionOptions {
+        const result: ConnectionOptions = {};
 
         if (options.time) {
-            params.append("time", options.time);
+            result.time = options.time;
         }
 
         if (options.date) {
-            params.append("date", options.date);
+            result.date = options.date;
         }
 
         if (options.arrivial) {
-            if (options.arrivial === true) {
-                params.append("isArrivalTime", "1");
-            }
+            result.isArrivalTime = options.arrivial; 
         }
 
         if (options.type) {
-            options.type.forEach((x: string) => {
-                params.append("transportations[]", x);
-            });
+            result.transportations = options.type;
         }
 
-        return params;
+        return result;
     }
 
-    public async getData(params: URLSearchParams): Promise<Trip[]> {
-        const response = await fetch(this.getURL(params));
-        const data = await response.json();
-        const connections = data.connections;
-        return connections.map((x: OpenDataTripRecord) => new OpenDataTrip(x));
+    public async getData(from: string, to: string, options?: ConnectionOptions): Promise<Trip[]> {
+        const  connections = await this.apiClient.getConnections(from, to, options);
+        return connections.map((x: OpenDataConnectionRecord) => new OpenDataTrip(x));
     }
 
     public findTrips(
@@ -53,16 +50,13 @@ export class OpenDataTripService implements TripService {
         to: string, 
         options?: TripServiceOptions
     ): Promise<Trip[]> {
-        let params = new URLSearchParams({
-            from,
-            to,
-        });
+        let correctOptions = {};
 
         if (options) {
-            params = this.handleTripOptions(params, options);
+            correctOptions = this.convertOptions(options);
         }
 
-        return this.getData(params);
+        return this.getData(from, to, correctOptions);
     }
 
     public async findTripsVia(
@@ -71,16 +65,13 @@ export class OpenDataTripService implements TripService {
         via: string, 
         options?: TripServiceOptions
     ): Promise<Trip[]> {
-        let params = new URLSearchParams({
-            from,
-            to,
-            via,
-        });
-        
+        let correctOptions = {};
+
         if (options) {
-            params = this.handleTripOptions(params, options);
+            correctOptions = this.convertOptions(options);
         }
 
-        return this.getData(params);
+        return this.getData(from, to, correctOptions);
+
     }
 }

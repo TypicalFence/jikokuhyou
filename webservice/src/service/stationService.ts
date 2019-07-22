@@ -7,7 +7,8 @@ import {
     OpenDataStation
 } from "../model/station";
 import { OpenDataStationRecord, OtdsStationRecord } from "../protocol";
-import { Injectable } from "@decorators/di";
+import { Injectable, Inject, Container, Optional } from "@decorators/di";
+import { OpenDataApiClient, OpenDataApi } from "./openDataApiClient";
 
 type SearchStation = (Station & StationSearchResult);
 
@@ -49,21 +50,20 @@ export class OtdsStationService implements StationSerivce {
 
 @Injectable()
 export class OpenDataStationService implements StationSerivce {
-    private url: string = "http://transport.opendata.ch/v1/locations";
-    
-    private getURL(query: string): string {
-        const params = new URLSearchParams({
-            query,
-        });
-        
-        return this.url + "?" + params.toString(); 
+
+    private apiClient: OpenDataApi;
+
+    public constructor(@Optional() @Inject("OpenApiClient") api?: OpenDataApi) {
+        if (api) {
+            this.apiClient = api;
+        } else {
+            this.apiClient = Container.get<OpenDataApi>(OpenDataApiClient);
+        }
     }
 
     public async searchStation(searchTerm: string): Promise<SearchStation[]> {
-        const response = await fetch(this.getURL(searchTerm));
-        const data = await response.json();
-        return data.stations.map((x: OpenDataStationRecord) => new OpenDataStation(x));
-
+        const data = await this.apiClient.getLocations(searchTerm);
+        return data.map((x: OpenDataStationRecord) => new OpenDataStation(x));
     }
 
 }

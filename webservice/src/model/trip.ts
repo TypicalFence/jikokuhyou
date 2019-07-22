@@ -1,5 +1,5 @@
 import { Station, OpenDataStation } from "./station";
-import { OpenDataTripRecord, OpenDataStopRecord, OpenDataSectionRecord } from "../protocol";
+import { OpenDataConnectionRecord, OpenDataStopRecord, OpenDataSectionRecord } from "../protocol";
 import { StopDTO, TripDTO, JourneyDTO, RideDTO } from "../protocol/api";
 
 function convertTimestamp(timeStamp: string|null): number|null {
@@ -64,8 +64,6 @@ export class OpenDataRide implements Ride {
             stops: this.stops.map((x): StopDTO => x.toJSON())
         };
     }
-
-
 }
 
 export class OpenDataStop implements Stop {
@@ -122,7 +120,7 @@ export class OpenDataTrip implements Trip, Journey {
     private readonly products: string[];
     private readonly rides: Ride[];
 
-    public constructor(data: OpenDataTripRecord) {
+    public constructor(data: OpenDataConnectionRecord) {
         this.from = new OpenDataStop(data.from);
         this.to = new OpenDataStop(data.to);
         this.duration = data.duration;

@@ -33,7 +33,7 @@ export { StationDTO, TripDTO } from "./api";
 export { 
     OpenDataStationRecord,
     OpenDataStopRecord,
-    OpenDataTripRecord,
+    OpenDataConnectionRecord,
     OpenDataJourneyRecord,
     OpenDataSectionRecord,
 } from "./external/opendata";
