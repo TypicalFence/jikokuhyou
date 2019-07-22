@@ -1,7 +1,6 @@
 import { describe, it } from "mocha";
 import { should } from "chai";
-import nock from "nock";
-import { OpenDataTripService, TripType } from "../../src/service/tripService";
+import { OpenDataTripService } from "../../src/service/tripService";
 import data from "./opendata.connections.json";
 
 should();
@@ -12,7 +11,7 @@ const api = {
     }
 };
 
-describe("OpenDataStationService", () => {
+describe("OpenDataTripService", () => {
     it("should find Trips", async () => {
         const service = new OpenDataTripService(api);
         const trips = await service.findTrips("Bern", "Zürich");
