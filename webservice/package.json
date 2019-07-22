@@ -46,7 +46,7 @@
     ],
     "exclude": [
       "**/*.d.ts",
-      "*/coverage",
+      "**/coverage/**",
       "**/test/**"
     ],
     "reporter": [
