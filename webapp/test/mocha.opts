@@ -1,0 +1,6 @@
+--require jsdom-global/register
+--require ts-node/register
+--require source-map-support/register
+--recursive
+test/**/*.js
+test/**/*.ts

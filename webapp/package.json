@@ -6,10 +6,11 @@
   "license": "AGPL3",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "dev": "./dev.sh",
     "dev-server": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "lint": "eslint './src/**' './test/**'"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -38,15 +39,21 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
     "@types/prop-types": "^15.7.0",
     "@types/react": "^16.8.7",
     "@types/react-autosuggest": "^9.3.9",
     "bulma": "^0.7.4",
     "bulma-checkradio": "^2.1.0",
+    "chai": "^4.2.0",
     "classnames": "^2.2.6",
     "cool-checkboxes-for-bulma.io": "^1.1.0",
     "eslint-import-resolver-node": "^0.3.2",
+    "jsdom": "^15.1.1",
+    "jsdom-global": "^3.0.2",
     "jsmediatags": "^3.8.1",
+    "mocha": "^6.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-autosuggest": "^9.4.3",
