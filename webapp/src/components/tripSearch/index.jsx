@@ -2,7 +2,7 @@ import React from "react";
 import "./index.scss";
 import { TripApiService, StationApiService } from "../../service";
 import Results from "./results";
-import SearchField from "./stationSearchField";
+import SearchField from "../stationSearchField";
 import Expander from "../expander";
 
 
