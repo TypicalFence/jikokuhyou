@@ -1,3 +1,5 @@
+@import "../../styles/base";
+
 .trip-search {
 
     .expander {
@@ -7,6 +9,25 @@
     .results {
         .icon {
             color: red;
+        }
+    }
+
+    .button {
+        color: $blue;
+        cursor: pointer;
+        background-color: white;
+        border: 1px solid $blue;
+        font-size: 1.5rem;
+        border-radius: 6px;
+        padding: 1rem;
+
+        &:hover {
+            color: white;
+            background-color: $blue;
+        }
+
+        &.is-fullwidth {
+            width: 100%;
         }
     }
 }

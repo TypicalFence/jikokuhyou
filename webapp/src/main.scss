@@ -1,9 +1,19 @@
-@import "bulma/sass/utilities/_all.sass";
-@import "bulma/sass/base/_all.sass";
-@import "bulma/sass/elements/_all.sass";
-@import "bulma/sass/components/_all.sass";
-@import "bulma/sass/grid/_all.sass";
-@import "bulma/sass/layout/_all.sass";
+@import "styles/external";
+
+.box {
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1);
+
+    &>hr {
+      background-color: hsl(0, 0%, 96%);
+      border: none;
+      display: block;
+      height: 2px;
+      margin: 1.5rem 0;
+    }
+}
+
 
 #index {
     margin-top: 2rem;

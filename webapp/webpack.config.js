@@ -1,57 +1,91 @@
 /* eslint-env node, mocha */
+const path = require("path");
+const glob = require("glob");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
-const path = require("path");
-
-const htmlPlugin = new HtmlWebPackPlugin({
-    template: "./src/index.html",
-    filename: "./index.html",
-});
+const ExtractCssPlugin = require("mini-css-extract-plugin");
+const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 
-module.exports = {
-    entry: ["./src/main.js"],
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "bundle.js",
-        publicPath: "/dist",
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
+module.exports = (env, options) => {
+    const devMode = options.mode !== "production";
+    const PATHS = {
+        src: path.join(__dirname, "src"),
+    };
+    const plugins = [
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: "./index.html",
+        }),
+        new ErrorOverlayPlugin(),
+        new ExtractCssPlugin(),
+    ];
+
+    if (!devMode) {
+        plugins.push(
+            new PurgecssPlugin({
+                paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+                whitelist: ["whitelisted"],
+            }),
+        );
+    }
+
+    return {
+        entry: ["./src/main.js"],
+        output: {
+            path: path.resolve(__dirname, "dist"),
+            filename: "bundle.js",
+            publicPath: "/dist",
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: "babel-loader",
+                    },
                 },
-            },
-            {
-                test: /\.tsx?$/,
-                loader: "awesome-typescript-loader",
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    "style-loader", // creates style nodes from JS strings
-                    "css-loader", // translates CSS into CommonJS
-                    "sass-loader", // compiles Sass to CSS, using Node Sass by default
-                ],
-            },
-        ],
-    },
-    resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx"],
-    },
-    devServer: {
-        contentBase: "./dist",
-        open: false,
-        historyApiFallback: {
-            index: "index.html",
+                {
+                    test: /\.tsx?$/,
+                    loader: "awesome-typescript-loader",
+                },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        {
+                            loader: ExtractCssPlugin.loader,
+                            options: {
+                                sourceMap: true,
+                                url: false,
+                            },
+                        },
+                        "css-loader",
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                sourceMap: true,
+                                url: false,
+                            },
+                        },
+                    ],
+                },
+            ],
         },
-        proxy: {
-            "/api": "http://localhost:3000",
+        resolve: {
+            extensions: [".ts", ".tsx", ".js", ".jsx"],
         },
-    },
-    devtool: "cheap-module-source-map", // 'eval' is not supported by error-overlay-webpack-plugin
-    plugins: [htmlPlugin, new ErrorOverlayPlugin()],
+        devServer: {
+            contentBase: "./dist",
+            open: false,
+            historyApiFallback: {
+                index: "index.html",
+            },
+            proxy: {
+                "/api": "http://localhost:3000",
+            },
+        },
+        plugins,
+        devtool: "cheap-module-source-map",
+    };
 };

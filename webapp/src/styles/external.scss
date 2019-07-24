@@ -1,0 +1,59 @@
+// minmal imports from bulma
+@import "base";
+@import "bulma/sass/grid/columns.sass";
+@import "bulma/sass/components/level.sass";
+@import "bulma/sass/elements/icon.sass";
+
+@include mobile {
+    .is-hidden-mobile {
+        display: none !important;
+    }
+}
+
+@include tablet {
+    .is-hidden-tablet {
+        display: none !important;
+    }
+}
+
+@include tablet-only {
+    .is-hidden-tablet-only {
+        display: none !important;
+    }
+}
+
+@include  touch {
+    .is-hidden-touch {
+        display: none !important;
+    }
+}
+
+@include desktop {
+    .is-hidden-desktop {
+        display: none !important;
+    }
+}
+
+@include desktop-only {
+    .is-hidden-desktop-only {
+        display: none !important;
+    }
+}
+
+@include widescreen {
+    .is-hidden-widescreen {
+        display: none !important;
+    }
+}
+
+@include widescreen-only {
+    .is-hidden-widescreen-only {
+        display: none !important;
+    }
+}
+
+@include fullhd {
+    .is-hidden-fullhd {
+        display: none !important;
+    }
+}
