@@ -10,12 +10,15 @@
     "dev": "./dev.sh",
     "dev-server": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "lint": "eslint './src/**' './test/**'"
+    "lint": "eslint './src/**' './test/**'",
+    "storybook": "start-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/react": "^5.1.9",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "awesome-typescript-loader": "^5.2.1",
