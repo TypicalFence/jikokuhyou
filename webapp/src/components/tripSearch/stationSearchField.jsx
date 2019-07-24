@@ -64,13 +64,13 @@ export default class StationSearchField extends Component {
 
     render() {
         const { value, suggestions } = this.state;
-        const { onChange } = this.props;
+        const { onChange, placeholder } = this.props;
         const inputProps = {
             className: "input",
-            placeholder: "Begriff",
+            placeholder,
             value,
             onChange: (event, { newValue }) => {
-                // new value must be manual input
+                // new value appears to be manual input
                 if (typeof newValue === "string") {
                     this.setState({
                         value: newValue,
@@ -115,4 +115,9 @@ export default class StationSearchField extends Component {
 StationSearchField.propTypes = {
     api: PropTypes.instanceOf(StationApiService).isRequired,
     onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+};
+
+StationSearchField.defaultProps = {
+    placeholder: "",
 };

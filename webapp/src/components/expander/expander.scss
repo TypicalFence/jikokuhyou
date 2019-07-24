@@ -1,0 +1,20 @@
+.expander {
+
+    text-align: center;
+
+    .content {
+        max-height: 0rem;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 1s, opacity 1s linear 0.0s;
+    }
+
+    &.open>.content {
+        max-height: 50rem;
+        opacity: 1;
+    }
+
+    .icon {
+        cursor: pointer;
+    }
+}

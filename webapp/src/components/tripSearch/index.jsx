@@ -3,6 +3,7 @@ import "./index.scss";
 import { TripApiService, StationApiService } from "../../service";
 import Results from "./results";
 import SearchField from "./stationSearchField";
+import Expander from "../expander";
 
 
 export default class TripSearch extends React.Component {
@@ -50,13 +51,24 @@ export default class TripSearch extends React.Component {
             <div className="box trip-search">
                 <div className="level">
                     <div className="level-left">
-                        <SearchField api={new StationApiService()} onChange={this.onSearchFieldChange("from").bind(this)} />
+                        <SearchField
+                            placeholder="from"
+                            api={new StationApiService()}
+                            onChange={this.onSearchFieldChange("from").bind(this)}
+                        />
                     </div>
-
                     <div className="level-right">
-                        <SearchField api={new StationApiService()} onChange={this.onSearchFieldChange("to").bind(this)} />
+                        <SearchField
+                            placeholder="from"
+                            api={new StationApiService()}
+                            onChange={this.onSearchFieldChange("to").bind(this)}
+                        />
                     </div>
                 </div>
+                <Expander maxHeight="3rem">
+                    <h1>Hello</h1>
+                </Expander>
+
                 <button
                     onClick={this.onSearchClick.bind(this)}
                     type="button"
