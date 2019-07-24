@@ -21,8 +21,6 @@ export class StationApiService extends ApiService {
 
 
     public async search(term: string): Promise<StationDTO[]> {
-
-
         const response = await this.getFetch()(`${this.url}/search?term=${term}`);
 
         if (response.ok) {
@@ -35,7 +33,7 @@ export class StationApiService extends ApiService {
     }
 }
 
-export class TripApiService extends ApiService{
+export class TripApiService extends ApiService {
     private url = "/api/v1/trip";
 
     public async search(from: string, to: string): Promise<TripDTO[]> {
