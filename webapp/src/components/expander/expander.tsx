@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react";
 import PropTypes from "prop-types";
 import "./expander.scss";
+import Icon from "../icon";
 
 interface Props {
     children: JSX.Element;
@@ -41,15 +42,19 @@ export default class Expander extends React.Component<Props, State> {
         const { open } = this.state;
 
         let triggerClass;
+        let icon: string;
         const style: CSSProperties = {};
 
         if (open) {
             triggerClass = "open";
+            icon = "fa-minus";
+
             if (maxHeight) {
                 style.maxHeight = maxHeight;
             }
         } else {
             triggerClass = "";
+            icon = "fa-plus";
         }
 
         return (
@@ -57,9 +62,9 @@ export default class Expander extends React.Component<Props, State> {
                 <div className="content" style={style}>
                     {children}
                 </div>
-                <span className="icon" onClick={this.onClick.bind(this)}>
-                    <i className="fas fa-plus" />
-                </span>
+                <button type="button" onClick={this.onClick.bind(this)}>
+                    <Icon name={icon} />
+                </button>
             </div>
         );
     }

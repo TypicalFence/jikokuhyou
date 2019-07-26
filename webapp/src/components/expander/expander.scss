@@ -14,7 +14,8 @@
         opacity: 1;
     }
 
-    .icon {
-        cursor: pointer;
-    }
+    &>button {
+        background-color: transparent;
+        border: none;
+    }    
 }
