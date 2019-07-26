@@ -18,7 +18,7 @@ function getTime(timeStamp: number|null): string {
     return "";
 }
 
-const Results = ({ trips }: ResultProps): JSX.Element => {
+const TripResults = ({ trips }: ResultProps): JSX.Element => {
     const renderPlatform = (stop: StopDTO): string => `${stop.station.name} - Gl. ${stop.platform}`;
 
     const content = trips.map((t: TripDTO): JSX.Element => (
@@ -29,7 +29,7 @@ const Results = ({ trips }: ResultProps): JSX.Element => {
                 </span>
                 {t.products[0]}
             </div>
-            <div className="column is-4">{`${getTime(t.from.departure)} -> ${getTime(t.to.arrival)}`}</div>
+            <div className="column is-2">{`${getTime(t.from.departure)} -> ${getTime(t.to.arrival)}`}</div>
             <div className="column is-4">{`${renderPlatform(t.from)} -> ${renderPlatform(t.to)}`}</div>
             <div className="column is-2">{t.duration}</div>
         </div>
@@ -42,4 +42,4 @@ const Results = ({ trips }: ResultProps): JSX.Element => {
     );
 };
 
-export default Results;
+export default TripResults;

@@ -51,7 +51,7 @@ module.exports = (env, options) => {
                     loader: "awesome-typescript-loader",
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.(sa|sc|c)ss$/,
                     use: [
                         {
                             loader: ExtractCssPlugin.loader,

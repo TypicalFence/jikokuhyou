@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 import { TripApiService, StationApiService } from "../../service";
-import Results from "./results";
+import TripSearchBody from "./tripsSearchBody";
 import SearchField from "../stationSearchField";
 import Expander from "../expander";
 
@@ -15,7 +15,7 @@ export default class TripSearch extends React.Component {
         this.state = {
             from: "",
             to: "",
-            results: [],
+            results: null,
             suggestions: [],
         };
     }
@@ -77,7 +77,7 @@ export default class TripSearch extends React.Component {
                     Search
                 </button>
                 <hr />
-                <Results trips={results} />
+                <TripSearchBody trips={results} />
             </div>
         );
     }
