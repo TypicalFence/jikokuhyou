@@ -17,6 +17,7 @@ export default class TripSearch extends React.Component {
             to: "",
             results: null,
             suggestions: [],
+            loading: false,
         };
     }
 
@@ -34,17 +35,23 @@ export default class TripSearch extends React.Component {
     }
 
     async onSearchClick() {
-        const { from, to } = this.state;
-        const results = await this.tripService.search(from, to);
-
         const state = { ...this.state };
-        state.results = results;
-        this.setState(state);
+        state.loading = true;
+
+        this.setState(state, async () => {
+            const { from, to } = this.state;
+            const results = await this.tripService.search(from, to);
+
+            state.results = results;
+            state.loading = false;
+            this.setState(state);
+        });
     }
 
     render() {
         const {
             results,
+            loading,
         } = this.state;
 
         return (
@@ -77,7 +84,7 @@ export default class TripSearch extends React.Component {
                     Search
                 </button>
                 <hr />
-                <TripSearchBody trips={results} />
+                <TripSearchBody loading={loading} trips={results} />
             </div>
         );
     }

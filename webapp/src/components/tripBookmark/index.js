@@ -1,1 +1,1 @@
-export * from "./tripBookmark";
+export { TripBookmark, TripBookmarkTypes, TripBookmarkModel } from "./tripBookmark";

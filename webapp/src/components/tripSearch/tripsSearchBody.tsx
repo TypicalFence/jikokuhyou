@@ -5,9 +5,11 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import { TripModel } from "../../model";
 import TripSearchResults from "./tripSearchResults";
 import { TripBookmark, TripBookmarkTypes, TripBookmarkModel } from "../tripBookmark";
+import Loader from "../loader";
 
 interface BodyProps {
     trips: TripModel[] | null;
+    loading: boolean;
 }
 
 const bookmarkData: TripBookmarkModel[] = [
@@ -19,13 +21,21 @@ const bookmarkData: TripBookmarkModel[] = [
     { product: "S8", from: "Bern", to: "Solothurn" },
 ];
 
-const TripSearchBody = ({ trips }: BodyProps): JSX.Element => {
+const TripSearchBody = ({ trips, loading }: BodyProps): JSX.Element => {
+    if (loading) {
+        return <Loader className="loader" width={80} height={80} color="#000000" />;
+    }
+
     if (trips) {
         return <TripSearchResults trips={trips} />;
     }
 
     const bookmarks = bookmarkData.map(
-        (x, i) => <Slide index={i}><TripBookmark trip={x} type={TripBookmarkTypes.TRAIN} /></Slide>,
+        (x, i): JSX.Element => (
+            <Slide index={i}>
+                <TripBookmark trip={x} type={TripBookmarkTypes.TRAIN} />
+            </Slide>
+        ),
     );
 
     return (
@@ -46,6 +56,7 @@ const TripSearchBody = ({ trips }: BodyProps): JSX.Element => {
 
 TripSearchBody.propTypes = {
     trips: PropTypes.arrayOf(PropTypes.instanceOf(TripModel)),
+    loading: PropTypes.bool.isRequired,
 };
 
 TripSearchBody.defaultProps = {
