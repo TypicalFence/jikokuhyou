@@ -72,15 +72,30 @@ export default class TripSearchForm extends React.Component<Props, State> {
                     </div>
                     <div className="level-right">
                         <SearchField
-                            placeholder="from"
-                            i
+                            placeholder="to"
                             api={new StationApiService()}
                             onChange={this.onSearchFieldChange("to").bind(this)}
                         />
                     </div>
                 </div>
-                <Expander maxHeight="3rem">
-                    <h1>Hello</h1>
+                <Expander maxHeight="10rem">
+                    <div className="level">
+                        <div className="level-left">
+
+                            <SearchField
+                                placeholder="via"
+                                api={new StationApiService()}
+                                onChange={this.onSearchFieldChange("to").bind(this)}
+                            />
+
+
+                        </div>
+                        <div className="level-right">
+                            <input type="checkbox" />
+                            <input type="date" />
+                            <input type="time" />
+                        </div>
+                    </div>
                 </Expander>
             </div>
         );
