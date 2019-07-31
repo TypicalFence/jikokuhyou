@@ -10,6 +10,7 @@
     "dev": "./dev.sh",
     "dev-server": "webpack-dev-server --mode development",
     "build": "webpack --mode development",
+    "build:prod": "webpack --mode production",
     "lint": "eslint './src/**' './test/**'",
     "storybook": "start-storybook"
   },
