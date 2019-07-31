@@ -1,10 +1,10 @@
 import { HasPosition, Position } from "./postion";
-import { StationDTO, OpenDataStationRecord, OtdsStationRecord } from "../protocol";
+import { StationResponse, OpenDataStationRecord, OtdsStationRecord } from "../protocol";
 
 export interface Station {
     getName(): string;
     getStationID(): string;
-    toJSON(): StationDTO;
+    toJSON(): StationResponse;
 }
 
 export interface StationSearchResult {
@@ -24,7 +24,7 @@ export class OtdsStation implements Station, StationSearchResult {
         this.data = json;
     }
 
-    public toJSON(): StationDTO {
+    public toJSON(): StationResponse {
         return {
             id: this.getStationID(),
             name: this.getName(),
@@ -62,7 +62,7 @@ export class OpenDataStation implements Station, StationSearchResult, HasPositio
         this.score = data.score;
     }
 
-    public toJSON(): StationDTO {
+    public toJSON(): StationResponse {
         return {
             id: this.id,
             name: this.name,

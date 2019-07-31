@@ -1,6 +1,13 @@
 import { Station, OpenDataStation } from "./station";
-import { OpenDataConnectionRecord, OpenDataStopRecord, OpenDataSectionRecord } from "../protocol";
-import { StopDTO, TripDTO, JourneyDTO, RideDTO } from "../protocol/api";
+import { 
+    OpenDataConnectionRecord,
+    OpenDataStopRecord, 
+    OpenDataSectionRecord,
+    StopResponse, 
+    TripResponse, 
+    JourneyResponse, 
+    RideResponse
+} from "../protocol";
 
 function convertTimestamp(timeStamp: string|null): number|null {
     if (timeStamp) {
@@ -17,7 +24,7 @@ export interface Stop {
     getArival(): number|null;
     getDelay(): number|null;
     getPlatform(): string|null;
-    toJSON(): StopDTO;
+    toJSON(): StopResponse;
 }
 
 export interface Trip {
@@ -25,18 +32,18 @@ export interface Trip {
     getTo(): Stop;
     getDuration(): string;
     getProducts(): string[];
-    toJSON(): TripDTO;
+    toJSON(): TripResponse;
 }
 
 export interface Ride {
     getProduct(): string|null;
     getStops(): Stop[];
-    toJSON(): RideDTO;
+    toJSON(): RideResponse;
 }
 
 export interface Journey {
     getRides(): Ride[];
-    toJSON(): JourneyDTO;
+    toJSON(): JourneyResponse;
 }
 
 export class OpenDataRide implements Ride {
@@ -58,10 +65,10 @@ export class OpenDataRide implements Ride {
         return this.stops;
     }
 
-    public toJSON(): RideDTO {
+    public toJSON(): RideResponse {
         return {
             product: this.product, 
-            stops: this.stops.map((x): StopDTO => x.toJSON())
+            stops: this.stops.map((x): StopResponse => x.toJSON())
         };
     }
 }
@@ -81,7 +88,7 @@ export class OpenDataStop implements Stop {
         this.delay = data.delay; 
     }
 
-    public toJSON(): StopDTO {
+    public toJSON(): StopResponse {
         return {
             arrival: this.arrival,
             departure: this.departure,
@@ -136,7 +143,7 @@ export class OpenDataTrip implements Trip, Journey {
         });
     }
 
-    public toJSON(): (TripDTO & JourneyDTO) {
+    public toJSON(): (TripResponse & JourneyResponse) {
         return {
             from: this.from.toJSON(),
             to: this.to.toJSON(),

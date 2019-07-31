@@ -1,9 +1,8 @@
 import React from "react";
-import { TripDTO } from "sbb-webservice";
-import { StopDTO } from "sbb-webservice/src/protocol/api";
+import { TripResponse, StopResponse } from "sbb-webservice";
 
 interface ResultProps {
-    trips: TripDTO[];
+    trips: TripResponse[];
 }
 
 function getTime(timeStamp: number|null): string {
@@ -19,9 +18,9 @@ function getTime(timeStamp: number|null): string {
 }
 
 const TripResults = ({ trips }: ResultProps): JSX.Element => {
-    const renderPlatform = (stop: StopDTO): string => `${stop.station.name} - Gl. ${stop.platform}`;
+    const renderPlatform = (stop: StopResponse): string => `${stop.station.name} - Gl. ${stop.platform}`;
 
-    const content = trips.map((t: TripDTO): JSX.Element => (
+    const content = trips.map((t: TripResponse): JSX.Element => (
         <div className="columns">
             <div className="column is-2">
                 <span className="icon">

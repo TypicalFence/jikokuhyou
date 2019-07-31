@@ -2,13 +2,13 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
 import { action, configureActions } from "@storybook/addon-actions";
-import { StationDTO } from "sbb-webservice";
+import { StationResponse } from "sbb-webservice";
 import StationSearchField from "../src/components/stationSearchField";
 import { StationApiService } from "../src/service";
 
 
 class ApiMock extends StationApiService {
-    private data: StationDTO[];
+    private data: StationResponse[];
 
     public constructor() {
         super();
@@ -29,7 +29,7 @@ class ApiMock extends StationApiService {
         ];
     }
 
-    public search(): Promise<StationDTO[]> {
+    public search(): Promise<StationResponse[]> {
         return Promise.resolve(this.data);
     }
 }

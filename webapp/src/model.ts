@@ -1,13 +1,13 @@
 import {
-    TripDTO,
-    StationDTO,
-    StopDTO,
-    JourneyDTO,
-    RideDTO,
+    TripResponse,
+    StationResponse,
+    StopResponse,
+    JourneyResponse,
+    RideResponse,
     Position,
 } from "sbb-webservice";
 
-export class StationModel implements StationDTO {
+export class StationModel implements StationResponse {
     public id: string;
 
     public name: string;
@@ -21,7 +21,7 @@ export class StationModel implements StationDTO {
         name,
         position,
         type,
-    }: StationDTO) {
+    }: StationResponse) {
         this.id = id;
         this.name = name;
         this.position = position;
@@ -29,8 +29,8 @@ export class StationModel implements StationDTO {
     }
 }
 
-export class StopModel implements StopDTO {
-    public station: StationDTO;
+export class StopModel implements StopResponse {
+    public station: StationResponse;
 
     // epoch
     public departure: number|null;
@@ -47,7 +47,7 @@ export class StopModel implements StopDTO {
         departure,
         platform,
         station,
-    }: StopDTO) {
+    }: StopResponse) {
         this.arrival = arrival;
         this.departure = departure;
         this.platform = platform;
@@ -56,16 +56,16 @@ export class StopModel implements StopDTO {
     }
 }
 
-export class TripModel implements TripDTO, JourneyDTO {
-    public from: StopDTO;
+export class TripModel implements TripResponse, JourneyResponse {
+    public from: StopResponse;
 
-    public to: StopDTO;
+    public to: StopResponse;
 
     public duration: string;
 
     public products: string[];
 
-    public rides: RideDTO[];
+    public rides: RideResponse[];
 
     public constructor({
         from,
@@ -73,7 +73,7 @@ export class TripModel implements TripDTO, JourneyDTO {
         duration,
         products,
         rides,
-    }: (TripDTO & JourneyDTO)) {
+    }: (TripResponse & JourneyResponse)) {
         this.from = from;
         this.to = to;
         this.duration = duration;

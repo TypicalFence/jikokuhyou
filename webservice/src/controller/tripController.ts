@@ -20,6 +20,7 @@ export default class TripController {
                                @Res() response: Response): Promise<Response> {
         
         const { from, to } = request.query;
+        
         if (from && to) { 
             const trips = await this.tripService.findTrips(from, to);
             return response.send(new ApiResponseBuilder(200).withData(trips));

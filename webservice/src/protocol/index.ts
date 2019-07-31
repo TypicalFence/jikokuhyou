@@ -28,11 +28,11 @@ export class ApiResponseBuilder implements ApiResponse {
 }
 
 export { 
-    TripDTO, 
-    StopDTO, 
-    StationDTO, 
-    JourneyDTO, 
-    RideDTO 
+    TripResponse, 
+    StopResponse, 
+    StationResponse, 
+    JourneyResponse, 
+    RideResponse, 
 } from "./api";
 
 // external

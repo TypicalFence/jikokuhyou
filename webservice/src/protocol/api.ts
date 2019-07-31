@@ -1,14 +1,15 @@
 import { Position } from "../model/postion";
 
-export interface StationDTO {
+// Response's
+export interface StationResponse {
     id: string;
     name: string;
     position?: Position;
     type?: string;
 }
 
-export interface StopDTO {
-    station: StationDTO;
+export interface StopResponse {
+    station: StationResponse;
     // epoch
     departure: number|null;
     arrival: number|null;
@@ -16,18 +17,20 @@ export interface StopDTO {
     platform: string|null;
 }
 
-export interface TripDTO {
-    from: StopDTO;
-    to: StopDTO;
+export interface TripResponse {
+    from: StopResponse;
+    to: StopResponse;
     duration: string;
     products: string[];
 }
 
-export interface RideDTO {
+export interface RideResponse {
     product: string|null;
-    stops: StopDTO[];
+    stops: StopResponse[];
 }
 
-export interface JourneyDTO {
-    rides: RideDTO[];
+export interface JourneyResponse {
+    rides: RideResponse[];
 }
+
+

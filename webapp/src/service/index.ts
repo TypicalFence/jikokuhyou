@@ -1,4 +1,4 @@
-import { ApiResponse, StationDTO, TripDTO } from "sbb-webservice";
+import { ApiResponse, StationResponse, TripResponse } from "sbb-webservice";
 
 type fetch = (resource: string, init?: RequestInit) => Promise<Response>;
 
@@ -20,7 +20,7 @@ export class StationApiService extends ApiService {
     private url = "/api/v1/station";
 
 
-    public async search(term: string): Promise<StationDTO[]> {
+    public async search(term: string): Promise<StationResponse[]> {
         const response = await this.getFetch()(`${this.url}/search?term=${term}`);
 
         if (response.ok) {
@@ -36,7 +36,7 @@ export class StationApiService extends ApiService {
 export class TripApiService extends ApiService {
     private url = "/api/v1/trip";
 
-    public async search(from: string, to: string): Promise<TripDTO[]> {
+    public async search(from: string, to: string): Promise<TripResponse[]> {
         const response = await this.getFetch()(`${this.url}/?from=${from}&to=${to}`);
 
         if (response.ok) {
