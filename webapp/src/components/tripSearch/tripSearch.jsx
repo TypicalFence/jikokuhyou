@@ -21,6 +21,7 @@ export default class TripSearch extends React.Component {
     onFormChange(value) {
         const state = { ...this.state };
         state.formValue = value;
+        console.log(value);
         this.setState(state);
     }
 
