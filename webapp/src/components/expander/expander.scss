@@ -1,7 +1,5 @@
 .expander {
 
-    text-align: center;
-
     .content {
         max-height: 0rem;
         opacity: 0;
@@ -12,10 +10,13 @@
     &.open>.content {
         max-height: 50rem;
         opacity: 1;
+        overflow: visible;
     }
 
     &>button {
         background-color: transparent;
         border: none;
+        display: block;
+        margin: 0 auto;
     }    
 }
