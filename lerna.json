@@ -1,5 +1,5 @@
 {
-  "packages": ["webservice", "webapp"],
+  "packages": ["webservice", "webapp", "lib/*"],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "independent"

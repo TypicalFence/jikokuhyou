@@ -1,12 +1,19 @@
-import { Position } from "../model/postion";
+import Joi from "@hapi/joi";
+import { Position, positionSchema } from "./position";
 
-// Response's
 export interface StationResponse {
     id: string;
     name: string;
     position?: Position;
     type?: string;
 }
+
+export const stationResponseSchema = Joi.object().keys({
+    id: Joi.string().min(1).required(),
+    name: Joi.string().min(1).required(),
+    position: positionSchema.optional(),
+    type: Joi.string().optional(),
+});
 
 export interface StopResponse {
     station: StationResponse;
@@ -32,5 +39,3 @@ export interface RideResponse {
 export interface JourneyResponse {
     rides: RideResponse[];
 }
-
-

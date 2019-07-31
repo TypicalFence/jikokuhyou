@@ -1,4 +1,4 @@
-import { ApiResponse, StationResponse, TripResponse } from "jikokuhyou-webservice";
+import { ApiResponse, StationResponse, TripResponse } from "jikokuhyou-protocol";
 
 type fetch = (resource: string, init?: RequestInit) => Promise<Response>;
 

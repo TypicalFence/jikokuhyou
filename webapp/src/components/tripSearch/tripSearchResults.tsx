@@ -1,5 +1,5 @@
 import React from "react";
-import { TripResponse, StopResponse } from "jikokuhyou-webservice";
+import { TripResponse, StopResponse } from "jikokuhyou-protocol";
 
 interface ResultProps {
     trips: TripResponse[];

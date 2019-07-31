@@ -1,5 +1,6 @@
-import { HasPosition, Position } from "./postion";
-import { StationResponse, OpenDataStationRecord, OtdsStationRecord } from "../protocol";
+import { Position, StationResponse } from "jikokuhyou-protocol";
+import { HasPosition } from "./postion";
+import { OpenDataStationRecord, OtdsStationRecord } from "../protocol";
 
 export interface Station {
     getName(): string;

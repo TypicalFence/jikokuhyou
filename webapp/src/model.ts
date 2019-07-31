@@ -5,7 +5,7 @@ import {
     JourneyResponse,
     RideResponse,
     Position,
-} from "jikokuhyou-webservice";
+} from "jikokuhyou-protocol";
 
 export class StationModel implements StationResponse {
     public id: string;

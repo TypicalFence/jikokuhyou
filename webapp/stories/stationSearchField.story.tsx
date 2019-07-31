@@ -2,7 +2,7 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { storiesOf } from "@storybook/react";
 import { action, configureActions } from "@storybook/addon-actions";
-import { StationResponse } from "jikokuhyou-webservice";
+import { StationResponse } from "jikokuhyou-protocol";
 import StationSearchField from "../src/components/stationSearchField";
 import { StationApiService } from "../src/service";
 

@@ -1,12 +1,14 @@
+import {
+    StopResponse, 
+    TripResponse, 
+    JourneyResponse, 
+    RideResponse
+} from "jikokuhyou-protocol";
 import { Station, OpenDataStation } from "./station";
 import { 
     OpenDataConnectionRecord,
     OpenDataStopRecord, 
     OpenDataSectionRecord,
-    StopResponse, 
-    TripResponse, 
-    JourneyResponse, 
-    RideResponse
 } from "../protocol";
 
 function convertTimestamp(timeStamp: string|null): number|null {

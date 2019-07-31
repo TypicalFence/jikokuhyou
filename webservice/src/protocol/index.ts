@@ -1,9 +1,4 @@
-export interface ApiResponse {
-    status: number;
-    msg?: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data?: any;
-}
+import { ApiResponse } from "jikokuhyou-protocol";
 
 export class ApiResponseBuilder implements ApiResponse {
     public status: number;
@@ -26,14 +21,6 @@ export class ApiResponseBuilder implements ApiResponse {
         return this;
     }
 }
-
-export { 
-    TripResponse, 
-    StopResponse, 
-    StationResponse, 
-    JourneyResponse, 
-    RideResponse, 
-} from "./api";
 
 // external
 export { 
