@@ -1,5 +1,5 @@
 {
-  "name": "sbb-webapp",
+  "name": "jikokuhyou-webapp",
   "version": "0.0.1",
   "main": "index.js",
   "author": "Alex Fence",
@@ -68,6 +68,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
     "react-simple-timefield": "^2.0.3",
-    "sbb-webservice": "0.0.1"
+    "react-with-direction": "^1.3.0",
+    "jikokuhyou-webservice": "0.0.1"
   }
 }

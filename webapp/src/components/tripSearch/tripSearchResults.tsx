@@ -1,5 +1,5 @@
 import React from "react";
-import { TripResponse, StopResponse } from "sbb-webservice";
+import { TripResponse, StopResponse } from "jikokuhyou-webservice";
 
 interface ResultProps {
     trips: TripResponse[];

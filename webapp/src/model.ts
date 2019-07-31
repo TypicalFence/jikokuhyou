@@ -5,7 +5,7 @@ import {
     JourneyResponse,
     RideResponse,
     Position,
-} from "sbb-webservice";
+} from "jikokuhyou-webservice";
 
 export class StationModel implements StationResponse {
     public id: string;

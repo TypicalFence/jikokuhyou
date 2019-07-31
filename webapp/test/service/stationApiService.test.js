@@ -13,3 +13,4 @@ describe("StationApiService", () => {
         expect(stations[1].name).to.equal("Solothurn West");
     });
 });
+

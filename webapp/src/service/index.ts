@@ -1,4 +1,4 @@
-import { ApiResponse, StationResponse, TripResponse } from "sbb-webservice";
+import { ApiResponse, StationResponse, TripResponse } from "jikokuhyou-webservice";
 
 type fetch = (resource: string, init?: RequestInit) => Promise<Response>;
 

@@ -1,5 +1,5 @@
 {
-  "name": "sbb-monorepo",
+  "name": "jikokuhyou-monorepo",
   "private": true,
   "workspaces": [
     "webservice",
