@@ -1,11 +1,10 @@
 import Joi from "@hapi/joi";
-import { ResponseData } from "./api";
 import { Position, positionSchema } from "./position";
 
 // --------------------------------------------------------
 // StationResponse
 // --------------------------------------------------------
-export interface StationResponse extends ResponseData {
+export interface StationResponse {
     id: string;
     name: string;
     position?: Position;
