@@ -12,7 +12,9 @@
   "scripts": {
       "postinstall": "yarn bootstrap",
       "bootstrap": "lerna bootstrap --use-workspaces",
-      "dev": "lerna run --scope jikokuhyou-webapp --scope jikokuhyou-webservice --parallel dev",
+      "build": "lerna run --parallel build",
+      "build:lib": "lerna run --scope jikokuhyou-protocol --parallel build",
+      "dev": "lerna run --parallel dev",
       "test": "lerna run test"
   }
 }
