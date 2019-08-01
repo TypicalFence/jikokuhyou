@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "chai";
-import Joi from "@hapi/joi";
+import * as Joi from "@hapi/joi";
 import { Position, positionSchema, isPosition } from "../src";
 
 describe("Position", (): void => {

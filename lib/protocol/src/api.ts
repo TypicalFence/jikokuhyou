@@ -1,6 +1,7 @@
+export type ResponseData = object;
+
 export interface ApiResponse {
     status: number;
     msg?: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data?: any;
+    data?: ResponseData|ResponseData[];
 }
