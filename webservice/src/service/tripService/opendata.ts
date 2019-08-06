@@ -1,7 +1,7 @@
 import { Injectable, Optional, Inject, Container } from "@decorators/di";
-import { TripService, TripServiceOptions } from ".";
+import { Trip, TripService, TripServiceOptions } from "jikokuhyou-service-interface";
 import { OpenDataConnectionRecord } from "../../protocol";
-import { OpenDataTrip, Trip } from "../../model/trip";
+import { OpenDataTrip } from "../../model/trip";
 import { OpenDataApi, OpenDataApiClient, ConnectionOptions } from "../openDataApiClient";
 
 

@@ -1,20 +1,15 @@
 import { URLSearchParams } from "url";
 import fetch from "node-fetch";
+import { Injectable, Inject, Container, Optional } from "@decorators/di";
+import { Station, StationSearchResult, StationSerivce } from "jikokuhyou-service-interface";
 import { 
-    Station, 
-    StationSearchResult, 
     OtdsStation, 
     OpenDataStation
 } from "../model/station";
 import { OpenDataStationRecord, OtdsStationRecord } from "../protocol";
-import { Injectable, Inject, Container, Optional } from "@decorators/di";
 import { OpenDataApiClient, OpenDataApi } from "./openDataApiClient";
 
 type SearchStation = (Station & StationSearchResult);
-
-export interface StationSerivce {
-    searchStation(searchTerm: string, limit?: number|null): Promise<SearchStation[]>;
-}
 
 //opentransportdata.swiss
 @Injectable()

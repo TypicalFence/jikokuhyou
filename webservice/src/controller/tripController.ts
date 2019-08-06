@@ -1,7 +1,7 @@
 import { Controller, Get, Request as Req, Response as Res } from "@decorators/express";
 import { Container } from "@decorators/di";
 import { Request, Response } from "express";
-import { TripService } from "../service/tripService";
+import { TripService } from "jikokuhyou-service-interface";
 import { ApiResponseBuilder } from "../protocol";
 import { config, Config } from "../config";
 

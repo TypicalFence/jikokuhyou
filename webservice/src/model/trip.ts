@@ -4,7 +4,14 @@ import {
     JourneyResponse, 
     RideResponse
 } from "jikokuhyou-protocol";
-import { Station, OpenDataStation } from "./station";
+import {
+    Trip,
+    Ride,
+    Journey,
+    Stop,
+    Station,
+} from "jikokuhyou-service-interface";
+import { OpenDataStation } from "./station";
 import { 
     OpenDataConnectionRecord,
     OpenDataStopRecord, 
@@ -17,35 +24,6 @@ function convertTimestamp(timeStamp: string|null): number|null {
     }
 
     return null;
-}
-
-export interface Stop {
-    getStation(): Station;
-    // epoch
-    getDeparture(): number|null;
-    getArival(): number|null;
-    getDelay(): number|null;
-    getPlatform(): string|null;
-    toJSON(): StopResponse;
-}
-
-export interface Trip {
-    getFrom(): Stop;
-    getTo(): Stop;
-    getDuration(): string;
-    getProducts(): string[];
-    toJSON(): TripResponse;
-}
-
-export interface Ride {
-    getProduct(): string|null;
-    getStops(): Stop[];
-    toJSON(): RideResponse;
-}
-
-export interface Journey {
-    getRides(): Ride[];
-    toJSON(): JourneyResponse;
 }
 
 export class OpenDataRide implements Ride {

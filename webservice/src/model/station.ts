@@ -1,20 +1,7 @@
 import { Position, StationResponse } from "jikokuhyou-protocol";
+import { Station, StationSearchResult, Typed } from "jikokuhyou-service-interface";
 import { HasPosition } from "./postion";
 import { OpenDataStationRecord, OtdsStationRecord } from "../protocol";
-
-export interface Station {
-    getName(): string;
-    getStationID(): string;
-    toJSON(): StationResponse;
-}
-
-export interface StationSearchResult {
-    getRank(): number;
-}
-
-export interface Typed {
-    getType(): string;
-}
 
 //opentransportdata.swiss
 export class OtdsStation implements Station, StationSearchResult {

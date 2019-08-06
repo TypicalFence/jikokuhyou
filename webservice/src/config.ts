@@ -1,7 +1,6 @@
 import { InjectionToken } from "@decorators/di";
-import {TripService} from "./service/tripService";
-import {StationSerivce} from "./service/stationService";
-import {Service} from "./service";
+import { StationSerivce, TripService } from "jikokuhyou-service-interface";
+import { Service } from "./service";
 
 
 export interface OtdsConfig {

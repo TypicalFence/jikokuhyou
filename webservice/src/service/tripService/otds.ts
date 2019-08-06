@@ -1,7 +1,6 @@
 import fetch, { Headers } from "node-fetch";
 import { Injectable, Inject } from "@decorators/di";
-import { TripService } from ".";
-import { Trip } from "../../model/trip";
+import { Trip, TripService } from "jikokuhyou-service-interface";
 import { config, Config } from "../../config";
 
 class TriasTripRequest {
