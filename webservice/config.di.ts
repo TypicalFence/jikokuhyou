@@ -1,6 +1,7 @@
 import { ServiceConfig } from "./src/config";
-import { OpenDataStationService } from "./src/service/stationService";
-import { OpenDataTripService } from "./src/service/tripService";
+import { OpenDataStationService } from "jikokuhyou-service-sbb-opendata";
+// import { OtdsStationService } from "jikokuhyou-service-sbb-otds";
+import { OpenDataTripService } from "jikokuhyou-service-sbb-opendata";
 
 const config: ServiceConfig = {
     stationService: OpenDataStationService,

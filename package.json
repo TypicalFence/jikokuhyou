@@ -4,7 +4,8 @@
   "workspaces": [
     "webservice",
     "webapp",
-    "lib/*"
+    "lib/*",
+    "lib/services/*"
   ],
   "devDependencies": {
     "lerna": "^3.13.1"

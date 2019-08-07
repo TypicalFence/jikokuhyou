@@ -1,22 +1,81 @@
 import {
-    StopResponse, 
+    StationResponse, 
+    RideResponse, 
     TripResponse, 
-    JourneyResponse, 
-    RideResponse
+    StopResponse, 
+    Position, 
+    JourneyResponse,
 } from "jikokuhyou-protocol";
 import {
+    Station, 
+    StationSearchResult, 
+    HasPosition, 
+    Typed, 
+    Stop, 
+    Ride, 
     Trip,
-    Ride,
-    Journey,
-    Stop,
-    Station,
+    Journey
 } from "jikokuhyou-service-interface";
-import { OpenDataStation } from "./station";
-import { 
+import {
+    OpenDataStationRecord,
+    OpenDataStopRecord,
     OpenDataConnectionRecord,
-    OpenDataStopRecord, 
     OpenDataSectionRecord,
-} from "../protocol";
+} from "./protocol";
+
+export class OpenDataStation implements Station, StationSearchResult, HasPosition, Typed {
+    private readonly name: string;
+
+    private readonly id: string;
+
+    private readonly position: Position;
+
+    private readonly type: string;
+
+    private readonly score: number;
+
+    public constructor(data: OpenDataStationRecord) {
+        this.name = data.name;
+        this.id = data.id;
+        const { x, y } = data.coordinate;
+        this.position = { x, y };
+        this.type = data.type;
+        this.score = data.score;
+    }
+
+    public toJSON(): StationResponse {
+        return {
+            id: this.id,
+            name: this.name,
+            position: this.position,
+            type: this.type,
+        };
+    }
+
+    public getName(): string {
+        return this.name;
+    }
+
+    public getStationID(): string {
+        return this.id;
+    }
+
+    public getRank(): number {
+        return this.score;
+    }
+
+    public getX(): number {
+        return this.position.x;
+    }
+
+    public getY(): number {
+        return this.position.y;
+    }
+
+    public getType(): string {
+        return this.type;
+    }
+}
 
 function convertTimestamp(timeStamp: string|null): number|null {
     if (timeStamp) {
@@ -27,8 +86,8 @@ function convertTimestamp(timeStamp: string|null): number|null {
 }
 
 export class OpenDataRide implements Ride {
-   
     private readonly stops: OpenDataStop[];
+
     // TODO properly map product
     private readonly product: string|null;
 
@@ -39,33 +98,37 @@ export class OpenDataRide implements Ride {
 
     public getProduct(): string|null {
         return this.product;
-    }    
-    
+    }
+
     public getStops(): Stop[] {
         return this.stops;
     }
 
     public toJSON(): RideResponse {
         return {
-            product: this.product, 
-            stops: this.stops.map((x): StopResponse => x.toJSON())
+            product: this.product,
+            stops: this.stops.map((x): StopResponse => x.toJSON()),
         };
     }
 }
 
 export class OpenDataStop implements Stop {
     private readonly arrival: number|null;
+
     private readonly departure: number|null;
+
     private readonly station: Station;
+
     private readonly delay: number|null;
+
     private readonly platform: string|null;
 
     public constructor(data: OpenDataStopRecord) {
-        this.arrival = convertTimestamp(data.arrival); 
+        this.arrival = convertTimestamp(data.arrival);
         this.departure = convertTimestamp(data.departure);
         this.station = new OpenDataStation(data.station);
         this.platform = data.platform;
-        this.delay = data.delay; 
+        this.delay = data.delay;
     }
 
     public toJSON(): StopResponse {
@@ -80,31 +143,34 @@ export class OpenDataStop implements Stop {
 
     public getStation(): Station {
         return this.station;
-    }    
-    
+    }
+
     public getDeparture(): number | null {
         return this.departure;
     }
-    
+
     public getArival(): number | null {
         return this.arrival;
     }
-    
+
     public getDelay(): number|null {
         return this.delay;
     }
-    
+
     public getPlatform(): string|null {
         return this.platform;
     }
 }
 
 export class OpenDataTrip implements Trip, Journey {
-    
     private readonly from: Stop;
+
     private readonly to: Stop;
+
     private readonly duration: string;
+
     private readonly products: string[];
+
     private readonly rides: Ride[];
 
     public constructor(data: OpenDataConnectionRecord) {
@@ -113,10 +179,10 @@ export class OpenDataTrip implements Trip, Journey {
         this.duration = data.duration;
         this.products = data.products;
         this.rides = [];
-        
+
         data.sections.forEach((s: OpenDataSectionRecord) => {
             if (s.journey && s.journey.passList.length > 0) {
-                const passList = s.journey.passList;
+                const { passList } = s.journey;
                 const stops = passList.map((x: OpenDataStopRecord) => new OpenDataStop(x));
                 this.rides.push(new OpenDataRide(s.journey.name, stops));
             }
@@ -135,22 +201,21 @@ export class OpenDataTrip implements Trip, Journey {
 
     public getFrom(): Stop {
         return this.from;
-    }    
-    
+    }
+
     public getTo(): Stop {
         return this.to;
     }
-    
+
     public getDuration(): string {
         return this.duration;
     }
-    
+
     public getProducts(): string[] {
         return this.products;
     }
-    
+
     public getRides(): Ride[] {
         return this.rides;
     }
-
 }

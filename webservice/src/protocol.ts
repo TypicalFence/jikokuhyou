@@ -21,13 +21,3 @@ export class ApiResponseBuilder implements ApiResponse {
         return this;
     }
 }
-
-// external
-export { 
-    OpenDataStationRecord,
-    OpenDataStopRecord,
-    OpenDataConnectionRecord,
-    OpenDataJourneyRecord,
-    OpenDataSectionRecord,
-} from "./external/opendata";
-export { OtdsStationRecord } from "./external/otds";
