@@ -17,7 +17,7 @@ export interface Typed {
 type SearchStation = (Station & StationSearchResult);
 
 export interface StationSerivce {
-    searchStation(searchTerm: string, limit?: number|null): Promise<SearchStation[]>;
+    searchStation(searchTerm: string, limit?: number|null): Promise<Station[]|SearchStation[]>;
 }
 
 
