@@ -1,0 +1,111 @@
+image: "node"
+
+stages:
+  - lint
+  - build-lib
+  - build
+  - test
+
+before_script:
+  - yarn install
+
+
+# ---------------------------------------------------------
+# lint 
+# ---------------------------------------------------------
+protocol_lint:
+    stage: lint
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-protocol lint
+
+service-interface_lint:
+    stage: lint
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-service-interface lint
+
+service-sbb-opendata_lint:
+    stage: lint
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-service-sbb-opendata lint
+
+service-london-tfl_lint:
+    stage: lint
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-service-london-tfl lint
+
+webservice_lint:
+    stage: lint
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-webservice lint
+
+webservice_lint:
+    stage: lint
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-webapp lint
+
+# ---------------------------------------------------------
+# build-lib 
+# ---------------------------------------------------------
+protocol_build:
+    stage: build-lib
+    script:
+        - yarn lerna run --scope jikokuhyou-protocol build
+
+
+service-interface_build:
+    stage: build-lib
+    script:
+        - yarn lerna run --scope jikokuhyou-service-interface --include-filtered-dependencies build
+
+
+# ---------------------------------------------------------
+# build
+# ---------------------------------------------------------
+webapp_build:
+    stage: build
+    script:
+        - yarn lerna run --scope jikokuhyou-webservice --include-filtered-dependencies build
+
+webapp_build:
+    stage: build
+    script:
+        - yarn lerna run --scope jikokuhyou-webapp --include-filtered-dependencies build
+
+service-sbb-opendata_build:
+    stage: build
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-service-sbb-opendata build
+
+service-london-tfl_build:
+    stage: build
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-service-london-tfl build
+
+# ---------------------------------------------------------
+# test
+# ---------------------------------------------------------
+protocol_test:
+    stage: test
+    script:
+        - yarn lerna run --scope jikokuhyou-protocol test
+
+webapp_test:
+    stage: test
+    script:
+        - yarn lerna run --scope jikokuhyou-protocol build
+        - yarn lerna run --scope jikokuhyou-webapp test
+
+service-sbb-opendata_test:
+    stage: test
+    allow_failure: true
+    script:
+        - yarn lerna run --scope jikokuhyou-service-interface --include-filtered-dependencies build
+        - yarn lerna run --scope jikokuhyou-service-sbb-opendata test
