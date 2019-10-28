@@ -11,7 +11,7 @@
     "build": "tsc",
     "dev": "tsc -w",
     "test": "TS_NODE_PROJECT=./tsconfig.test.json mocha",
-    "coverage": "nyc mocha"
+    "coverage": "TS_NODE_PROJECT=./tsconfig.test.json nyc mocha"
   },
   "dependencies": {
     "typescript": "^3.5.3",

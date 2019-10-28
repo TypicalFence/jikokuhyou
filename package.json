@@ -13,9 +13,11 @@
   "scripts": {
       "postinstall": "yarn bootstrap",
       "bootstrap": "lerna bootstrap --use-workspaces",
-      "build": "lerna run --parallel build",
-      "build:lib": "lerna run --scope jikokuhyou-protocol --parallel build",
+      "build": "lerna run build",
+      "build:lib": "lerna run --scope '{jikokuhyou-protocol,jikokuhyou-service-interface}' --sort build",
       "dev": "lerna run --parallel dev",
-      "test": "lerna run test"
+      "test": "lerna run test",
+      "lint": "lerna run --no-bail lint",
+      "clean": "git clean -dfX"
   }
 }
