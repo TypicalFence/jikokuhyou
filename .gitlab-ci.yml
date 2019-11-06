@@ -43,7 +43,7 @@ webservice_lint:
     script:
         - yarn lerna run --scope jikokuhyou-webservice lint
 
-webservice_lint:
+webapp_lint:
     stage: lint
     allow_failure: true
     script:
@@ -67,7 +67,7 @@ service-interface_build:
 # ---------------------------------------------------------
 # build
 # ---------------------------------------------------------
-webapp_build:
+webservice_build:
     stage: build
     script:
         - yarn lerna run --scope jikokuhyou-webservice --include-filtered-dependencies build
