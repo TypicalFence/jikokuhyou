@@ -22,8 +22,10 @@ module.exports = {
     "rules": {
         "indent": [
             "error",
-            4
+            4,
+            { SwitchCase: 1 }
         ],
+        "@typescript-eslint/indent": ["error", 4, { SwitchCase: 1 }],
         "linebreak-style": [
             "error",
             "unix"
