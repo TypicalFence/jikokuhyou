@@ -21,13 +21,13 @@ export function isTripRequest(obj: any): obj is TripRequest {
 }
 
 export interface TripRequestOptions {
-    moment?: number;
+    Moment?: string;
     arrivial?: boolean;
     type?: string[];
 }
 
 export const TripRequestOptionsSchema = Joi.object().keys({
-    moment: Joi.date().timestamp("unix").optional(),
+    moment: Joi.date().iso().optional(),
     arrival: Joi.boolean().optional(),
     type: Joi.string().optional(),
 });
