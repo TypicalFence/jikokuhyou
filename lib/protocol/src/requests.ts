@@ -3,14 +3,14 @@ import Joi from "@hapi/joi";
 export interface TripRequest {
     from: string;
     to: string;
-    via: string;
-    options: TripRequestOptions;
+    via?: string;
+    options?: TripRequestOptions;
 }
 
 export const TripRequestSchema = Joi.object().keys({
     from: Joi.string().min(3).required(),
     to: Joi.string().min(3).required(),
-    via: Joi.string().min(3).required(),
+    via: Joi.string().min(3).optional(),
     options: Joi.string().optional(),
 });
 
