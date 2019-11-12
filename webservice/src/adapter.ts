@@ -27,7 +27,29 @@ export class TripRequestOptionsAdapter implements TripServiceOptions {
         }
        
         if (typeof type !== "undefined") {
-            this.type = type;
+            this.type = type.map((x: string) => {
+                if (x === TripType.BUS) {
+                    return TripType.BUS;
+                }
+
+                if (x === TripType.CABLEWAY) {
+                    return TripType.CABLEWAY;
+                }
+
+                if (x === TripType.SHIP) {
+                    return TripType.SHIP;
+                }
+
+                if (x === TripType.TRAIN) {
+                    return TripType.TRAIN;
+                }
+
+                if (x === TripType.TRAM) {
+                    return TripType.TRAM;
+                }
+
+                return null;
+            }).filter((x: TripType|null): x is TripType => x !== null);
         }
     }
 }
