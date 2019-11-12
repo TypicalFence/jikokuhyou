@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import { TripApiService, StationApiService } from "../../service";
+import { TripApiService, StationApiService, TripSearchOptions } from "../../service";
 import TripSearchBody from "./tripsSearchBody";
 import TripSearchForm from "../tripSearchForm";
 
@@ -31,8 +31,23 @@ export default class TripSearch extends React.Component {
 
         this.setState(state, async () => {
             const { formValue } = this.state;
-            const { from, to } = formValue;
-            const results = await this.tripService.search(from, to);
+            const {
+                from, to, arrival, epoch, via,
+            } = formValue;
+            const date = new Date(0);
+            date.setUTCSeconds(epoch);
+            const moment = date.toISOString();
+
+            const options = {
+                moment,
+                arrival,
+            };
+
+            if (via !== "") {
+                options.via = via;
+            }
+
+            const results = await this.tripService.search(from, to, options);
 
             state.results = results;
             state.loading = false;

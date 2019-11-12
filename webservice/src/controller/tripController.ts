@@ -6,6 +6,7 @@ import { TripRequest, isTripRequest } from "jikokuhyou-protocol";
 import { ApiResponseBuilder } from "../protocol";
 import { config, Config } from "../config";
 import { TripRequestOptionsAdapter } from "../adapter";
+import { JsonBodyMiddleware } from "../middleware";
 
 @Controller("/api/v1/trip")
 export default class TripController {
@@ -31,10 +32,12 @@ export default class TripController {
         }
     }
 
-    @Post("/search")
+    @Post("/search", [JsonBodyMiddleware])
     public async search(@Req() request: Request, 
                                @Res() response: Response): Promise<Response> {
         
+        console.log(request.body);
+
         if (isTripRequest(request.body)) {
             const requestData: TripRequest = request.body;
             const {from, to, via,  options} = requestData;
