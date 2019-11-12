@@ -81,13 +81,13 @@ service-sbb-opendata_build:
     stage: build
     allow_failure: true
     script:
-        - yarn lerna run --scope jikokuhyou-service-sbb-opendata build
+        - yarn lerna run --scope jikokuhyou-service-sbb-opendata --include-filtered-dependencies build
 
 service-london-tfl_build:
     stage: build
     allow_failure: true
     script:
-        - yarn lerna run --scope jikokuhyou-service-london-tfl build
+        - yarn lerna run --scope jikokuhyou-service-london-tfl --include-filtered-dependencies build
 
 # ---------------------------------------------------------
 # test
