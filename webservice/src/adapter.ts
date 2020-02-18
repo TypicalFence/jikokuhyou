@@ -15,7 +15,7 @@ export class TripRequestOptionsAdapter implements TripServiceOptions {
         if (typeof moment !== "undefined") {
             const date = new Date(moment);
             
-            this.date = `${date.getFullYear() }-${date.getMonth()}-${date.getDay()}`;
+            this.date = `${date.getFullYear() }-${date.getMonth() + 1}-${date.getDate()}`;
 
             if (moment.includes("T")) {
                 this.time = `${date.getHours()}:${date.getMinutes()}`;
