@@ -32,10 +32,9 @@ export class StationModel implements StationResponse {
 export class StopModel implements StopResponse {
     public station: StationResponse;
 
-    // epoch
-    public departure: number|null;
+    public departure: string|null;
 
-    public arrival: number|null;
+    public arrival: string|null;
 
     public delay: number|null;
 

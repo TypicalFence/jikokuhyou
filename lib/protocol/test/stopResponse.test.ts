@@ -10,7 +10,7 @@ import {
 describe("StopResponse", (): void => {
     it("can be validated using it's schema", (): void => {
         const validStop: StopResponse = {
-            arrival: 1564686120000,
+            arrival: "2020-02-19T17:52:57",
             departure: null,
             station: {
                 id: "8507000",
@@ -27,7 +27,7 @@ describe("StopResponse", (): void => {
 
     it("should not be valid when the data is invalid", (): void => {
         const invalidStop = {
-            arrival: "1564686120000",
+            arrival: "2020-02-19T17:52:57",
             departure: null,
             station: {
                 id: "8507000",
@@ -42,7 +42,7 @@ describe("StopResponse", (): void => {
 
     it("can be validated with the isStopResponse function", (): void => {
         const validStop: StopResponse = {
-            arrival: 1564686120000,
+            arrival: "2020-02-19T17:52:57",
             departure: null,
             station: {
                 id: "8507000",

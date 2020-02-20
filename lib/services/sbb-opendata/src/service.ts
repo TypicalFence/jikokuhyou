@@ -38,13 +38,11 @@ export class OpenDataStationService implements StationSerivce {
 
 function convertOptions(options: TripServiceOptions): ConnectionOptions {
     const result: ConnectionOptions = {};
+    const { moment } = options;
 
-    if (options.time) {
-        result.time = options.time;
-    }
-
-    if (options.date) {
-        result.date = options.date;
+    if (moment) {
+        result.date = `${moment.getFullYear()}-${moment.getMonth() + 1}-${moment.getDate()}`;
+        result.time = `${moment.getHours()}:${moment.getMinutes().toLocaleString().padStart(2, "0")}`;
     }
 
     if (options.arrivial) {

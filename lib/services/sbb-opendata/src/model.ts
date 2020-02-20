@@ -1,20 +1,20 @@
 import {
-    StationResponse, 
-    RideResponse, 
-    TripResponse, 
-    StopResponse, 
-    Position, 
+    StationResponse,
+    RideResponse,
+    TripResponse,
+    StopResponse,
+    Position,
     JourneyResponse,
 } from "jikokuhyou-protocol";
 import {
-    Station, 
-    StationSearchResult, 
-    HasPosition, 
-    Typed, 
-    Stop, 
-    Ride, 
+    Station,
+    StationSearchResult,
+    HasPosition,
+    Typed,
+    Stop,
+    Ride,
     Trip,
-    Journey
+    Journey,
 } from "jikokuhyou-service-interface";
 import {
     OpenDataStationRecord,
@@ -77,14 +77,6 @@ export class OpenDataStation implements Station, StationSearchResult, HasPositio
     }
 }
 
-function convertTimestamp(timeStamp: string|null): number|null {
-    if (timeStamp) {
-        return new Date(timeStamp).getTime();
-    }
-
-    return null;
-}
-
 export class OpenDataRide implements Ride {
     private readonly stops: OpenDataStop[];
 
@@ -113,9 +105,9 @@ export class OpenDataRide implements Ride {
 }
 
 export class OpenDataStop implements Stop {
-    private readonly arrival: number|null;
+    private readonly arrival: string|null;
 
-    private readonly departure: number|null;
+    private readonly departure: string|null;
 
     private readonly station: Station;
 
@@ -124,8 +116,8 @@ export class OpenDataStop implements Stop {
     private readonly platform: string|null;
 
     public constructor(data: OpenDataStopRecord) {
-        this.arrival = convertTimestamp(data.arrival);
-        this.departure = convertTimestamp(data.departure);
+        this.arrival = data.arrival;
+        this.departure = data.departure;
         this.station = new OpenDataStation(data.station);
         this.platform = data.platform;
         this.delay = data.delay;
@@ -145,11 +137,11 @@ export class OpenDataStop implements Stop {
         return this.station;
     }
 
-    public getDeparture(): number | null {
+    public getDeparture(): string | null {
         return this.departure;
     }
 
-    public getArival(): number | null {
+    public getArival(): string | null {
         return this.arrival;
     }
 

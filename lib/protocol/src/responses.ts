@@ -29,17 +29,16 @@ export function isStationResponse(obj: any): obj is StationResponse {
 // --------------------------------------------------------
 export interface StopResponse {
     station: StationResponse;
-    // epoch
-    departure: number|null;
-    arrival: number|null;
+    departure: string|null;
+    arrival: string|null;
     delay: number|null;
     platform: string|null;
 }
 
 export const stopResponseSchema = Joi.object().keys({
     station: stationResponseSchema.required(),
-    departure: Joi.number().required().allow(null),
-    arrival: Joi.number().required().allow(null),
+    departure: Joi.date().iso().optional().allow(null),
+    arrival: Joi.date().iso().optional().allow(null),
     delay: Joi.number().required().allow(null),
     platform: Joi.string().required().allow(null),
 });

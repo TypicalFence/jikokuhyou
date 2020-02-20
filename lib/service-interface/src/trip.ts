@@ -3,9 +3,9 @@ import { Station } from "./station";
 
 export interface Stop {
     getStation(): Station;
-    // epoch
-    getDeparture(): number|null;
-    getArival(): number|null;
+    // should return a ISO8601
+    getDeparture(): string|null;
+    getArival(): string|null;
     getDelay(): number|null;
     getPlatform(): string|null;
     toJSON(): StopResponse;
@@ -39,8 +39,7 @@ export enum TripType {
 }
 
 export interface TripServiceOptions {
-    time?: string;
-    date?: string;
+    moment?: Date;
     arrivial?: boolean;
     type?: TripType[];
 }

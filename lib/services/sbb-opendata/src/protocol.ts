@@ -27,9 +27,11 @@ export interface OpenDataJourneyRecord {
 
 export interface OpenDataStopRecord {
     station: OpenDataStationRecord;
+    // ISO8601
     arrival: string|null;
     // cursed timestamp, probably relative to current month
     arrivalTimestamp: number|null;
+    // ISO8601
     departure: string|null;
     // cursed timestamp, see above
     departureTimestamp: number|null;

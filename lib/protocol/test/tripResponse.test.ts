@@ -10,7 +10,7 @@ import {
 
 
 const bern: StopResponse = {
-    arrival: 1564686120000,
+    arrival: "2020-02-19T17:52:57",
     departure: null,
     station: {
         id: "8507000",

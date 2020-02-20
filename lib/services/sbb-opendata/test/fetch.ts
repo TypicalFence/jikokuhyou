@@ -14,12 +14,14 @@ export interface FakeResponse {
 
 class Response implements FakeResponse {
     private body: any;
+
     public status: number;
+
     public ok: boolean;
 
     public constructor(status: number, body: any) {
         this.status = status;
-        
+
         if (status === 200) {
             this.ok = true;
         } else {
@@ -36,9 +38,8 @@ class Response implements FakeResponse {
     public text(): Promise<string> {
         if (typeof this.body === "string") {
             return Promise.resolve(this.body);
-        } else {
-            return Promise.reject();
         }
+        return Promise.reject();
     }
 }
 

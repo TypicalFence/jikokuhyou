@@ -4,8 +4,7 @@ import { TripServiceOptions, TripType } from "jikokuhyou-service-interface";
 
 export class TripRequestOptionsAdapter implements TripServiceOptions {
     
-    public time?: string;
-    public date?: string;
+    public moment?: Date;
     public arrivial?: boolean;
     public type?: TripType[];
 
@@ -13,17 +12,11 @@ export class TripRequestOptionsAdapter implements TripServiceOptions {
         const { moment, arrivial, type  } = options;
 
         if (typeof moment !== "undefined") {
-            const date = new Date(moment);
-            
-            this.date = `${date.getFullYear() }-${date.getMonth() + 1}-${date.getDate()}`;
-
-            if (moment.includes("T")) {
-                this.time = `${date.getHours()}:${date.getMinutes()}`;
-            }
+            this.moment = new Date(moment);
         }
 
         if (typeof moment !== "undefined") {
-            this.arrivial = arrivial;
+            this.arrivial = arrivial || false;
         }
        
         if (typeof type !== "undefined") {

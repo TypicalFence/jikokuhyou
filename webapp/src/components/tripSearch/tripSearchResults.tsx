@@ -5,7 +5,7 @@ interface ResultProps {
     trips: TripResponse[];
 }
 
-function getTime(timeStamp: number|null): string {
+function getTime(timeStamp: string|null): string {
     if (timeStamp) {
         const date = new Date(timeStamp);
         const hours = date.getHours().toString().padStart(2, "0");
