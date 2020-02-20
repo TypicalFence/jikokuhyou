@@ -35,8 +35,7 @@
     "ts-node-dev": "^1.0.0-pre.40"
   },
   "optionalDependencies": {
-    "jikokuhyou-service-sbb-opendata": "^0.0.1",
-    "jikokuhyou-service-sbb-otds": "^0.0.1"
+    "jikokuhyou-service-sbb-opendata": "^0.0.1"
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
