@@ -100,6 +100,8 @@ export class OpenDataTripService implements TripService {
             correctOptions = convertOptions(options);
         }
 
+        correctOptions = { via, ...correctOptions };
+
         return this.getData(from, to, correctOptions);
     }
 }

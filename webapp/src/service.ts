@@ -59,12 +59,14 @@ export class TripApiService extends ApiService {
         options: TripSearchOptions,
     ): Promise<TripResponse[]> {
         const fetch: fetch = this.getFetch();
-        const { via } = options;
+        const {
+            via, type, arrivial, moment,
+        } = options;
         const tripRequest: TripRequest = {
             from,
             to,
             via,
-            options,
+            options: { type, arrivial, moment },
         };
 
         const response = await fetch(`${this.url}/search`, {
